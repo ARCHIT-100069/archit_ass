@@ -1,0 +1,202 @@
+export interface ProductItem {
+    name: string;
+    image?: string;
+}
+
+export interface SubCategory {
+    title: string;
+    products: ProductItem[];
+}
+
+export interface ProductCategory {
+    id: string;
+    number: number;
+    title: string;
+    description: string;
+    subcategories: SubCategory[];
+}
+
+export const productCatalog: ProductCategory[] = [
+    {
+        id: "railway-sleeper-inspection",
+        number: 1,
+        title: "Railway Sleeper Inspection & Precision Gauges",
+        description: "Precision gauges for dimensional inspection, master references, and digital measurement of railway sleepers.",
+        subcategories: [
+            {
+                title: "Dimensional Inspection Series",
+                products: [
+                    { name: "Toe Gap Gauges", image: "/products/toe-gap-gauge.png" },
+                    { name: "Insert Location Gauges" },
+                    { name: "Rail Seat Slope Gauges (1 in 20)" },
+                    { name: "Camber & Wind Gauges" },
+                ],
+            },
+            {
+                title: "Master Reference Series",
+                products: [
+                    { name: "Master Reference Gauges" },
+                    { name: "Digital Master Gauges", image: "/products/digital-master-gauge.png" },
+                    { name: "Gauge Checking Level Tables" },
+                    { name: "Calibration Standards" },
+                ],
+            },
+            {
+                title: "Digital Measurement Series",
+                products: [
+                    { name: "Digital Rail Profile Gauges" },
+                    { name: "Track Geometry Inspection Tools" },
+                    { name: "Data Logging Inspection Devices" },
+                ],
+            },
+        ],
+    },
+    {
+        id: "pre-casting-production",
+        number: 2,
+        title: "Pre-Casting & Production Equipment (PSC & Precast)",
+        description: "Moulds, stressing systems, and plant equipment for PSC sleeper and precast concrete production.",
+        subcategories: [
+            {
+                title: "Mould & Formwork Systems",
+                products: [
+                    { name: "PSC Sleeper Moulds (BG/MG)" },
+                    { name: "Modular Precast Moulds" },
+                    { name: "High-Frequency Vibrators" },
+                ],
+            },
+            {
+                title: "Stressing & Tensioning Systems",
+                products: [
+                    { name: "Hydraulic Jacking Units (500–1000 KN)" },
+                    { name: "Digital Stress Recording Systems" },
+                    { name: "Anchorage & Wedges" },
+                    { name: "HTS Wire Straightening & Cutting Machines" },
+                ],
+            },
+            {
+                title: "Plant & Handling Equipment",
+                products: [
+                    { name: "Spares for Steam Boilers & Curing Systems" },
+                    { name: "Spares for Gantry Cranes (4T/5T)" },
+                    { name: "Vacuum Lifters" },
+                    { name: "Spares for De-moulding Hoists" },
+                ],
+            },
+        ],
+    },
+    {
+        id: "civil-material-testing",
+        number: 3,
+        title: "Civil Material Testing Laboratory Equipment",
+        description: "Comprehensive lab equipment for cement, concrete, soil, geotechnical, bitumen, and road testing.",
+        subcategories: [
+            {
+                title: "Cement & Concrete Testing",
+                products: [
+                    { name: "Compression Testing Machine (2000 KN), Cube Moulds", image: "/products/ctm-compression-testing-machine.png" },
+                    { name: "Flexural Testing Machine, Beam Moulds", image: "/products/flexural-testing-machine.png" },
+                    { name: "Vicat Apparatus, Blaine Apparatus", image: "/products/vicat-apparatus.jpg" },
+                    { name: "Slump Cone & Vee-Bee Apparatus", image: "/products/slump-cone-apparatus.jpg" },
+                    { name: "Rebound Hammer", image: "/products/rebound-hammer.png" },
+                    { name: "UPV Tester", image: "/products/upv-tester.jpg" },
+                    { name: "RCPT Apparatus", image: "/products/rcpt-apparatus.png" },
+                ],
+            },
+            {
+                title: "Soil & Geotechnical Testing",
+                products: [
+                    { name: "CBR Testing Machine", image: "/products/cbr-test-apparatus.png" },
+                    { name: "Direct Shear & Triaxial Apparatus", image: "/products/direct-shear-apparatus.png" },
+                    { name: "Sieves, Sieve Shakers & Core Cutters", image: "/products/sieve-shaker.png" },
+                    { name: "Compaction Test Equipment", image: "/products/compaction-test-equipment.png" },
+                ],
+            },
+            {
+                title: "Bitumen & Road Testing",
+                products: [
+                    { name: "Flash Points, Tar Viscometer, Penetrometer", image: "/products/flash-point-apparatus.png" },
+                    { name: "Bitumen Penetrometer", image: "/products/bitumen-penetrometer.png" },
+                    { name: "Softening Point Apparatus", image: "/products/softening-point-apparatus.png" },
+                    { name: "Ductility Testing Machine", image: "/products/ductility-testing-machine.png" },
+                    { name: "Marshall Stability Equipment", image: "/products/marshall-test-apparatus.png" },
+                ],
+            },
+        ],
+    },
+    {
+        id: "chemical-paint-wood-testing",
+        number: 4,
+        title: "Chemical, Paint & Wood Testing",
+        description: "Coating thickness, gloss, adhesion, pH, turbidity, and moisture testing instruments.",
+        subcategories: [
+            {
+                title: "Products",
+                products: [
+                    { name: "DFT Coating Thickness Gauges", image: "/products/dft-coating-gauge.png" },
+                    { name: "Gloss Meters", image: "/products/gloss-meter.png" },
+                    { name: "Adhesion Testers", image: "/products/adhesion-tester.png" },
+                    { name: "Digital pH & TDS Meters", image: "/products/ph-meter.png" },
+                    { name: "Turbidity Meters", image: "/products/turbidity-meter.png" },
+                    { name: "Wood Moisture Meters", image: "/products/wood-moisture-meter.png" },
+                ],
+            },
+        ],
+    },
+    {
+        id: "industrial-safety-ppe",
+        number: 5,
+        title: "Industrial Safety & PPE",
+        description: "Personal protective equipment including helmets, gloves, harnesses, and respirators.",
+        subcategories: [
+            {
+                title: "Products",
+                products: [
+                    { name: "Safety Helmets", image: "/products/safety-helmet.webp" },
+                    { name: "High Visibility Reflective Jackets", image: "/products/safety-jackets.png" },
+                    { name: "Safety Gloves (Heat / Nitrile / Cut Resistant)", image: "/products/safety-gloves.png" },
+                    { name: "Safety Shoes", image: "/products/safety-shoes.jpg" },
+                    { name: "Full Body Harnesses", image: "/products/safety-harness.png" },
+                    { name: "Respirators & N95 Masks", image: "/products/safety-mask.png" },
+                ],
+            },
+        ],
+    },
+    {
+        id: "surveying-field-monitoring",
+        number: 6,
+        title: "Surveying & Field Monitoring",
+        description: "Total stations, auto levels, laser distance meters, and field measurement accessories.",
+        subcategories: [
+            {
+                title: "Products",
+                products: [
+                    { name: "Total Stations", image: "/products/total-station.jpg" },
+                    { name: "Auto Levels & Theodolites", image: "/products/autolevel.png" },
+                    { name: "Laser Distance Meters", image: "/products/laser-distance-meter.png" },
+                    { name: "Measuring Tapes & Ranging Rods", image: "/products/measuring-tapes.jpg" },
+                ],
+            },
+        ],
+    },
+    {
+        id: "environmental-lab-utility",
+        number: 7,
+        title: "Environmental & Lab Utility Equipment",
+        description: "Environmental monitoring instruments, storage solutions, cleaning equipment, and lab utilities.",
+        subcategories: [
+            {
+                title: "Products",
+                products: [
+                    { name: "Noise Level Meters", image: "/products/noise-level-meter.jpg" },
+                    { name: "Lux Meters", image: "/products/lux-meter.png" },
+                    { name: "Digital Anemometers", image: "/products/anemometer.png" },
+                    { name: "Flammable Storage Cabinets", image: "/products/flammable-storage-cabinet.png" },
+                    { name: "Fluorescent Lighting Unit (FLU)", image: "/products/flu.png" },
+                    { name: "Ultrasonic Cleaners", image: "/products/ultrasonic-cleaner.jpg" },
+                    { name: "Sample Collection Bags", image: "/products/sample-collection-bag.jpg" },
+                ],
+            },
+        ],
+    },
+];
