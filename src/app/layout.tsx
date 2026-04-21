@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/layout/SmoothScroll";
+import Preloader from "@/components/layout/Preloader";
 
 import LoadingScreen from "@/components/layout/LoadingScreen";
 import RefreshRedirect from "@/components/layout/RefreshRedirect";
@@ -40,6 +41,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${playfair.variable} ${inter.className}`}>
+        <Preloader />
         <RefreshRedirect />
         <LoadingScreen />
         <SmoothScroll>

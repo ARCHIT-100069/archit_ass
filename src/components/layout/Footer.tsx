@@ -12,15 +12,13 @@ export default function Footer() {
 
                     {/* Brand */}
                     <div className="md:col-span-1">
-                        <div className="mb-6">
-                            <img
-                                src="/logo.jpg"
-                                alt="Archit Associates Logo"
-                                width="60"
-                                height="60"
-                                className="opacity-90"
-                            />
-                        </div>
+                        <Image
+                            src="/logo.jpg"
+                            alt="Archit Associates"
+                            width={60}
+                            height={60}
+                            style={{ objectFit: 'contain', marginBottom: 12, filter: 'brightness(0)' }}
+                        />
                         <p className="text-neutral-900/55 text-[14px] leading-[1.7] max-w-xs">
                             Premium quality industrial spares and machinery equipment. Ensuring operational efficiency since inception.
                         </p>
