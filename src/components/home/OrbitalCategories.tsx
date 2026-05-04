@@ -76,7 +76,7 @@ export default function OrbitalCategories() {
 
                     {/* Centered Logo container */}
                     <motion.div
-                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%]"
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] z-[5]"
                         style={{ opacity: useTransform(scrollYProgress, [0, 0.05, 0.9, 1], [0.3, 1, 1, 0.3]) }}
                     >
                         <Image
@@ -84,6 +84,7 @@ export default function OrbitalCategories() {
                             alt="Archit Associates"
                             fill
                             className="object-contain"
+                            style={{ filter: "brightness(0) saturate(100%)" }}
                         />
                     </motion.div>
                 </div>
@@ -106,7 +107,7 @@ export default function OrbitalCategories() {
                ========================================= */}
             <div className="md:hidden container mx-auto px-4 sm:px-6 py-16">
                 {/* Mobile Section Label */}
-                <div className="text-center mb-10 px-2">
+                <div className="text-center mb-8 px-2 relative z-10">
                     <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-neutral-400">
                         What We Do
                     </span>
@@ -115,8 +116,23 @@ export default function OrbitalCategories() {
                     </h2>
                 </div>
 
+                {/* Mobile Logo Circle */}
+                <div className="relative mx-auto mb-10 w-28 h-28 flex items-center justify-center">
+                    <div className="absolute inset-0 rounded-full border border-neutral-200/60 z-0" />
+                    <div className="absolute inset-[-20px] rounded-full border border-neutral-100/40 z-0 opacity-50" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] h-[40%] z-[5]">
+                        <Image
+                            src="/logo.jpg"
+                            alt="Archit Associates"
+                            fill
+                            className="object-contain"
+                            style={{ filter: "brightness(0) saturate(100%)" }}
+                        />
+                    </div>
+                </div>
+
                 {/* Responsive Grid replacing absolute positioning */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {categories.map((cat, i) => (
                         <MobileCard key={cat.id} category={cat} index={i} />
                     ))}
