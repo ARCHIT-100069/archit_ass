@@ -46,12 +46,15 @@ export default function OrbitalCategories() {
     const angleStep = 360 / cardCount;
 
     return (
-        <section ref={sectionRef} className="relative h-[400vh]">
-            {/* Sticky viewport */}
-            <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+        <section ref={sectionRef} className="relative md:h-[400vh]">
+            
+            {/* =========================================
+                DESKTOP VIEW (Sticky Orbital Animation)
+               ========================================= */}
+            <div className="hidden md:flex sticky top-0 h-screen items-center justify-center overflow-hidden">
                 {/* Section label */}
                 <motion.div
-                    className="absolute top-24 left-0 right-0 text-center z-10"
+                    className="absolute top-24 left-0 right-0 text-center z-10 px-6"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
@@ -60,15 +63,20 @@ export default function OrbitalCategories() {
                     <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-neutral-400">
                         What We Do
                     </span>
-                    <h2 className="font-heading text-4xl md:text-5xl lg:text-[56px] font-bold tracking-[-0.03em] leading-[1.1] mt-2">
+                    <h2 className="font-heading text-5xl lg:text-[56px] font-bold tracking-[-0.03em] leading-[1.1] mt-2 break-words">
                         Our Expertise
                     </h2>
                 </motion.div>
 
-                {/* Central logo */}
-                <div className="relative z-10">
+                {/* Central logo with perfect centering inside circles */}
+                <div className="relative z-10 w-44 h-44 md:w-56 md:h-56">
+                    {/* Outer Rings */}
+                    <div className="absolute inset-0 rounded-full border border-neutral-200/60" />
+                    <div className="absolute inset-[-40px] rounded-full border border-neutral-100/40" />
+
+                    {/* Centered Logo container */}
                     <motion.div
-                        className="w-28 h-28 md:w-36 md:h-36 relative"
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%]"
                         style={{ opacity: useTransform(scrollYProgress, [0, 0.05, 0.9, 1], [0.3, 1, 1, 0.3]) }}
                     >
                         <Image
@@ -78,32 +86,43 @@ export default function OrbitalCategories() {
                             className="object-contain"
                         />
                     </motion.div>
-                    {/* Subtle ring around logo */}
-                    <div className="absolute inset-[-20px] md:inset-[-28px] rounded-full border border-neutral-200/60" />
-                    <div className="absolute inset-[-50px] md:inset-[-70px] rounded-full border border-neutral-100/40" />
                 </div>
 
                 {/* Desktop orbiting cards */}
-                <div className="hidden md:block">
-                    {categories.map((cat, i) => (
-                        <OrbitalCard
-                            key={cat.id}
-                            category={cat}
-                            index={i}
-                            total={cardCount}
-                            angleOffset={i * angleStep}
-                            scrollProgress={scrollYProgress}
-                        />
-                    ))}
+                {categories.map((cat, i) => (
+                    <OrbitalCard
+                        key={cat.id}
+                        category={cat}
+                        index={i}
+                        total={cardCount}
+                        angleOffset={i * angleStep}
+                        scrollProgress={scrollYProgress}
+                    />
+                ))}
+            </div>
+
+            {/* =========================================
+                MOBILE & TABLET VIEW (Responsive Grid)
+               ========================================= */}
+            <div className="md:hidden container mx-auto px-4 sm:px-6 py-16">
+                {/* Mobile Section Label */}
+                <div className="text-center mb-10 px-2">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-neutral-400">
+                        What We Do
+                    </span>
+                    <h2 className="font-heading text-3xl sm:text-4xl font-bold tracking-[-0.03em] leading-[1.1] mt-2 break-words">
+                        Our Expertise
+                    </h2>
                 </div>
 
-                {/* Mobile stacked cards */}
-                <div className="md:hidden absolute inset-x-4 top-44 bottom-16 flex flex-col justify-center gap-4">
+                {/* Responsive Grid replacing absolute positioning */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {categories.map((cat, i) => (
                         <MobileCard key={cat.id} category={cat} index={i} />
                     ))}
                 </div>
             </div>
+
         </section>
     );
 }
