@@ -7,8 +7,8 @@ import { productCatalog } from "@/data/productCatalog";
 
 export default function CategoryGrid() {
     return (
-        <section className="py-24 md:py-32 bg-white">
-            <div className="container mx-auto px-6">
+        <section className="py-16 md:py-32 bg-white">
+            <div className="container mx-auto px-4 md:px-6">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-6">
                     <h2 className="font-heading text-4xl md:text-5xl lg:text-[48px] font-bold tracking-[-0.025em] leading-[1.1]">Our Solutions</h2>
                     <p className="text-neutral-900/55 max-w-md md:text-right text-[15px] leading-[1.7]">
@@ -16,7 +16,7 @@ export default function CategoryGrid() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-8 lg:gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 lg:gap-10">
                     {productCatalog.map((category, index) => (
                         <Link href={`/products/${category.id}`} key={category.id} className="group block">
                             <motion.div

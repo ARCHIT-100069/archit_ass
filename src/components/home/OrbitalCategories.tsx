@@ -98,7 +98,7 @@ export default function OrbitalCategories() {
                 </div>
 
                 {/* Mobile stacked cards */}
-                <div className="md:hidden absolute inset-x-6 top-44 bottom-16 flex flex-col justify-center gap-4">
+                <div className="md:hidden absolute inset-x-4 top-44 bottom-16 flex flex-col justify-center gap-4">
                     {categories.map((cat, i) => (
                         <MobileCard key={cat.id} category={cat} index={i} />
                     ))}

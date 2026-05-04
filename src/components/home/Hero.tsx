@@ -24,7 +24,7 @@ export default function Hero() {
             <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/55 via-black/45 to-black/60" />
 
             {/* Centered Hero Content — top layer */}
-            <div className="relative z-20 h-full flex flex-col items-center justify-center px-4">
+            <div className="relative z-20 h-full flex flex-col items-center justify-center px-4 md:px-8 w-full">
 
                 {/* Logo — transparent white PNG, no CSS hacks */}
                 <motion.div

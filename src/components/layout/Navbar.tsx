@@ -25,23 +25,23 @@ export default function Navbar() {
 
     return (
         <nav
-            className="fixed top-0 left-0 w-full z-50 bg-transparent border-b border-transparent"
+            className="fixed top-0 left-0 w-full z-[70] bg-transparent border-b border-transparent"
             style={{ height: "76px" }}
         >
-            <div className="container mx-auto px-6 h-full flex justify-between items-center">
+            <div className="container mx-auto px-4 md:px-6 h-full flex justify-between items-center">
                 {/* Logo */}
                 <Link
                     href="/"
-                    className="flex items-center gap-2.5 z-50 group cursor-pointer"
+                    className="relative flex items-center gap-2.5 z-[70] group cursor-pointer"
                     onClick={(e) => {
                         e.preventDefault();
                         window.location.href = "/";
                     }}
                 >
                     <img
-                        src="/logo-white.png"
+                        src={isOpen ? "/logo.jpg" : "/logo-white.png"}
                         alt="Archit Associates Logo"
-                        className="h-[34px] w-[34px] md:h-[38px] md:w-[38px] object-contain"
+                        className="h-[34px] w-[34px] md:h-[38px] md:w-[38px] object-contain transition-colors duration-300"
                         style={{
                             background: 'transparent',
                             border: 'none',
@@ -52,7 +52,7 @@ export default function Navbar() {
                             outline: 'none',
                         }}
                     />
-                    <span className="font-heading font-bold text-lg md:text-xl tracking-[-0.02em] text-white">
+                    <span className={`font-heading font-bold text-lg md:text-xl tracking-[-0.02em] transition-colors duration-300 ${isOpen ? "text-black" : "text-white"}`}>
                         Archit Associates
                     </span>
                 </Link>
@@ -96,7 +96,7 @@ export default function Navbar() {
 
                 {/* Mobile Menu Button */}
                 <button
-                    className="md:hidden z-50 p-2 text-white"
+                    className={`md:hidden relative z-[70] p-2 transition-colors duration-300 ${isOpen ? "text-black" : "text-white"}`}
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {isOpen ? <X size={24} /> : <Menu size={24} />}
