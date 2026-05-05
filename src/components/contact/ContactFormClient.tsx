@@ -8,13 +8,31 @@ import { FormInput, FormTextarea } from "@/components/ui/FormFields";
 export default function ContactFormClient() {
     const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus("submitting");
-        setTimeout(() => {
-            setStatus("success");
-            setTimeout(() => setStatus("idle"), 3000);
-        }, 1500);
+
+        const formData = new FormData(e.target as HTMLFormElement);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                setStatus("success");
+                setTimeout(() => setStatus("idle"), 5000);
+            } else {
+                alert("Failed to send message. Please try again later.");
+                setStatus("idle");
+            }
+        } catch (error) {
+            alert("Failed to send message. Please check your connection.");
+            setStatus("idle");
+        }
     };
 
     if (status === "success") {

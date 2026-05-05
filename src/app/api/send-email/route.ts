@@ -5,16 +5,18 @@ const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key_for_build'
 
 export async function POST(request: Request) {
   try {
-    const { name, email, message } = await request.json();
+    const { name, email, message, subject } = await request.json();
+    const finalSubject = subject ? `New Contact Message: ${subject}` : 'New Quotation Request';
 
     const response = await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: 'architasst@gmail.com',
-      subject: 'New Quotation Request',
+      subject: finalSubject,
       html: `
-        <h2>New Quotation Request</h2>
+        <h2>${finalSubject}</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
+        ${subject ? `<p><strong>Subject:</strong> ${subject}</p>` : ''}
         <p><strong>Message:</strong> ${message}</p>
       `,
     });
