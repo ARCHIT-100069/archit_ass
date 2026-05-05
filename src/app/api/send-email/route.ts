@@ -19,6 +19,10 @@ export async function POST(request: Request) {
       `,
     });
 
+    if (response.error) {
+      return NextResponse.json({ error: response.error.message }, { status: 400 });
+    }
+
     return NextResponse.json({ success: true, data: response });
   } catch (error: any) {
     return NextResponse.json(
