@@ -116,21 +116,6 @@ export default function OrbitalCategories() {
                     </h2>
                 </div>
 
-                {/* Mobile Logo Circle */}
-                <div className="relative mx-auto mb-10 w-28 h-28 flex items-center justify-center">
-                    <div className="absolute inset-0 rounded-full border border-neutral-200/60 z-0" />
-                    <div className="absolute inset-[-20px] rounded-full border border-neutral-100/40 z-0 opacity-50" />
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40%] h-[40%] z-[5]">
-                        <Image
-                            src="/logo.jpg"
-                            alt="Archit Associates"
-                            fill
-                            className="object-contain"
-                            style={{ filter: "brightness(0) saturate(100%)" }}
-                        />
-                    </div>
-                </div>
-
                 {/* Responsive Grid replacing absolute positioning */}
                 <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {categories.map((cat, i) => (
