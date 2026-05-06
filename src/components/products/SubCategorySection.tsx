@@ -58,7 +58,7 @@ function ProductCardMini({ product, index }: { product: ProductItem; index: numb
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: index * 0.04 }}
             viewport={{ once: true }}
-            className="group relative bg-neutral-50 border border-neutral-100 hover:border-neutral-300 hover:bg-white rounded-lg p-5 transition-all duration-300 hover:shadow-md cursor-pointer flex flex-col"
+            className="group relative bg-neutral-50 border border-neutral-100 hover:border-neutral-300 hover:bg-white rounded-lg p-6 transition-all duration-300 hover:shadow-md cursor-pointer flex flex-col"
         >
             {/* Thumbnail — shown only when image is available */}
             {imgSrc && (
@@ -113,7 +113,7 @@ export default function SubCategorySection({ title, products, isFlat = false }: 
             )}
 
             {/* Product items grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {products.map((product, index) => (
                     <ProductCardMini key={product.name} product={product} index={index} />
                 ))}

@@ -22,11 +22,11 @@ export default function ProductsPage() {
                 </Link>
 
                 {/* Page Hero */}
-                <div className="mb-12 md:mb-16">
+                <div className="mb-12 md:mb-16 mt-8">
                     <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold tracking-[-0.03em] mb-4 leading-[1.1]">
                         Our Products
                     </h1>
-                    <p className="text-neutral-900/60 max-w-2xl text-lg leading-[1.65]">
+                    <p className="text-neutral-500 max-w-2xl text-base leading-[1.65]">
                         Browse our complete range of industrial manufacturing solutions and
                         equipment, organized by category.
                     </p>

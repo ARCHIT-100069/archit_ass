@@ -37,7 +37,7 @@ export default function CategorySection({
     );
 
     return (
-        <section className="mb-4">
+        <section className="mb-6">
             {/* Category Header — clickable toggle */}
             <button
                 onClick={() => setIsOpen((prev) => !prev)}
