@@ -43,8 +43,8 @@ export default function ContactPage() {
                                 <div>
                                     <h3 className="font-semibold mb-1 text-base tracking-tight">Address</h3>
                                     <p className="text-neutral-900/60 text-[14px] leading-relaxed">
-                                        123 Industrial Area, Phase 1<br />
-                                        New Delhi, India - 110020
+                                        A 242, Jahangir Puri<br />
+                                        Near Kali Mandir, Delhi - 110033
                                     </p>
                                 </div>
                             </div>
@@ -55,8 +55,7 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <h3 className="font-semibold mb-1 text-base tracking-tight">Phone</h3>
-                                    <p className="text-neutral-900/60 text-[14px]">+91 98765 43210</p>
-                                    <p className="text-neutral-900/60 text-[14px]">+91 98765 43211</p>
+                                    <p className="text-neutral-900/60 text-[14px]">+91 81309 73844</p>
                                 </div>
                             </div>
 
@@ -85,7 +84,7 @@ export default function ContactPage() {
                         {/* Google Map */}
                         <div className="mt-12 w-full h-64 bg-neutral-100 rounded-xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14008.114777265918!2d77.2062!3d28.6139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.075932594611!2d77.16444787522513!3d28.72451107561498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d013fc5eda597%3A0x4425d8eda8162d10!2sARCHIT%20ASSOCIATES%20-%20Experts%20in%20Laboratory%20Material%20Testing%20Equipment!5e0!3m2!1sen!2sin!4v1715243555234!5m2!1sen!2sin"
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0 }}
