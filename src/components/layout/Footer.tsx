@@ -39,8 +39,7 @@ export default function Footer() {
                     <div>
                         <h4 className="font-semibold mb-6 text-[13px] uppercase tracking-[0.12em]">Contact</h4>
                         <ul className="space-y-4 text-[14px] text-neutral-900/60">
-                            <li>A 242, Jahangir Puri</li>
-                            <li>Near Kali Mandir, Delhi - 110033</li>
+                            <li>New Delhi - 110033</li>
                             <li>+91 81309 73844</li>
                             <li>architasst@gmail.com</li>
                         </ul>
