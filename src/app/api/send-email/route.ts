@@ -33,7 +33,9 @@ export async function POST(request: Request) {
       `;
     } else {
       const { name, email, message, subject } = data;
-      finalSubject = subject ? \`New Contact Message: \${subject}\` : 'New Contact Message';
+      finalSubject = subject
+  ? `New Contact Message: ${subject}`
+  : 'New Contact Message';
       htmlContent = `
         <h2>${finalSubject}</h2>
         <p><strong>Name:</strong> ${name || 'N/A'}</p>
