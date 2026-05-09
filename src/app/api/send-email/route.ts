@@ -33,15 +33,19 @@ export async function POST(request: Request) {
       `;
     } else {
       const { name, email, message, subject } = data;
+
       finalSubject = subject
-  ? `New Contact Message: ${subject}`
-  : 'New Contact Message';
+        ? `New Contact Message: ${subject}`
+        : 'New Contact Message';
+
       htmlContent = `
         <h2>${finalSubject}</h2>
+        <hr />
         <p><strong>Name:</strong> ${name || 'N/A'}</p>
         <p><strong>Email:</strong> ${email || 'N/A'}</p>
         ${subject ? `<p><strong>Subject:</strong> ${subject}</p>` : ''}
-        <p><strong>Message:</strong> ${message || 'N/A'}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message || 'N/A'}</p>
       `;
     }
 
