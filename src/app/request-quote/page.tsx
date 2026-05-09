@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { Metadata } from "next";
+import { Suspense } from "react";
 import EnquiryFormClient from "@/components/enquiry/EnquiryFormClient";
 
 export const metadata: Metadata = {
@@ -35,7 +36,9 @@ export default function EnquiryPage() {
                 {/* Premium Form Card */}
                 <div className="max-w-5xl mx-auto">
                     <div className="bg-[#fafafa] border border-gray-200 rounded-2xl shadow-sm p-6 md:p-10 lg:p-14">
-                        <EnquiryFormClient />
+                        <Suspense fallback={<div>Loading form...</div>}>
+                            <EnquiryFormClient />
+                        </Suspense>
                     </div>
                 </div>
             </div>

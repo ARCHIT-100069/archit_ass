@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Package, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface ProductItem {
     name: string;
@@ -18,37 +19,12 @@ interface SubCategorySectionProps {
 
 function ProductCardMini({ product, index }: { product: ProductItem; index: number }) {
     const [imgSrc, setImgSrc] = useState(product.image ?? null);
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const router = useRouter();
 
-    const handleQuotation = async (e: React.MouseEvent) => {
+    const handleQuotation = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        setStatus('loading');
-        
-        try {
-            const response = await fetch('/api/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: 'Customer Name',
-                    email: 'customer@email.com',
-                    message: `Requesting quotation for product: ${product.name}`
-                })
-            });
-
-            if (response.ok) {
-                setStatus('success');
-                setTimeout(() => setStatus('idle'), 3000);
-            } else {
-                setStatus('error');
-                setTimeout(() => setStatus('idle'), 3000);
-            }
-        } catch (error) {
-            setStatus('error');
-            setTimeout(() => setStatus('idle'), 3000);
-        }
+        router.push(`/request-quote?product=${encodeURIComponent(product.name)}`);
     };
 
     return (
@@ -59,6 +35,7 @@ function ProductCardMini({ product, index }: { product: ProductItem; index: numb
             transition={{ duration: 0.3, delay: index * 0.04 }}
             viewport={{ once: true }}
             className="group relative bg-neutral-50 border border-neutral-100 hover:border-neutral-300 hover:bg-white rounded-lg p-6 transition-all duration-300 hover:shadow-md cursor-pointer flex flex-col"
+            onClick={handleQuotation}
         >
             {/* Thumbnail — shown only when image is available */}
             {imgSrc && (
@@ -87,11 +64,10 @@ function ProductCardMini({ product, index }: { product: ProductItem; index: numb
             <div className="flex justify-end mt-3 pt-3 border-t border-neutral-100 group-hover:border-neutral-200 transition-colors z-10 relative">
                 <button 
                     onClick={handleQuotation}
-                    disabled={status === 'loading' || status === 'success'}
-                    className="flex items-center text-[11px] font-medium uppercase tracking-wider text-neutral-400 group-hover:text-neutral-800 transition-colors disabled:opacity-50"
+                    className="flex items-center text-[11px] font-medium uppercase tracking-wider text-neutral-400 group-hover:text-neutral-800 transition-colors"
                 >
-                    {status === 'loading' ? 'Sending...' : status === 'success' ? 'Sent!' : status === 'error' ? 'Failed' : 'Request Quotation'}
-                    {status === 'idle' && <ArrowRight className="ml-1.5 w-3 h-3 group-hover:translate-x-0.5 transition-transform" />}
+                    Request Quotation
+                    <ArrowRight className="ml-1.5 w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                 </button>
             </div>
         </motion.div>

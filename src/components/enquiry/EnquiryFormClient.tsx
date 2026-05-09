@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Send, FileCheck } from "lucide-react";
 import { motion } from "framer-motion";
 import { FormInput, FormTextarea, FormSelect, FormFile } from "@/components/ui/FormFields";
@@ -24,6 +25,8 @@ const categoryOptions = [
 
 export default function EnquiryFormClient() {
     const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+    const searchParams = useSearchParams();
+    const defaultProduct = searchParams.get("product") || "";
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -107,7 +110,7 @@ export default function EnquiryFormClient() {
                         placeholder="Select a category"
                         required
                     />
-                    <FormInput label="Product / Equipment Name" name="productName" placeholder="e.g. Toe Gap Gauge, CBR Machine" required />
+                    <FormInput label="Product / Equipment Name" name="productName" placeholder="e.g. Toe Gap Gauge, CBR Machine" required value={defaultProduct} />
                     <FormInput label="Quantity Required" name="quantity" type="number" placeholder="Enter quantity" required />
                     <FormInput label="Required Delivery Location" name="deliveryLocation" placeholder="City / Site name" required />
                     <FormSelect

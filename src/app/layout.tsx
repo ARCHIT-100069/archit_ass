@@ -19,7 +19,6 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import Preloader from "@/components/layout/Preloader";
 
 import LoadingScreen from "@/components/layout/LoadingScreen";
-import RefreshRedirect from "@/components/layout/RefreshRedirect";
 
 export default function RootLayout({
   children,
@@ -42,7 +41,6 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${playfair.variable} ${inter.className}`}>
         <Preloader />
-        <RefreshRedirect />
         <LoadingScreen />
         <SmoothScroll>
           <Navbar />

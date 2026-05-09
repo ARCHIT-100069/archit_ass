@@ -2,20 +2,31 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+        };
+        window.addEventListener("scroll", handleScroll);
+        // Set initial state
+        handleScroll();
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const navLinks = [
         { name: "Home", href: "/" },
         { name: "Products", href: "/products" },
         { name: "About", href: "/about" },
         { name: "Contact", href: "/contact" },
-        { name: "Enquiry", href: "/enquiry" },
+        { name: "Request Quote", href: "/request-quote" },
     ];
 
     const isActive = (href: string) => {
@@ -23,9 +34,17 @@ export default function Navbar() {
         return pathname.startsWith(href);
     };
 
+    // If on homepage and not scrolled, text is white to contrast with video.
+    // Otherwise (scrolled or on other pages), text is black.
+    const isDarkTheme = pathname === "/" && !scrolled && !isOpen;
+
     return (
         <nav
-            className="fixed top-0 left-0 w-full z-[70] bg-transparent border-b border-transparent"
+            className={`fixed top-0 left-0 w-full z-[70] border-b transition-all duration-300 ${
+                isDarkTheme 
+                    ? "bg-transparent border-transparent" 
+                    : "bg-white/90 backdrop-blur-md border-neutral-200 shadow-sm"
+            }`}
             style={{ height: "76px" }}
         >
             <div className="container mx-auto px-4 md:px-6 h-full flex justify-between items-center">
@@ -39,7 +58,7 @@ export default function Navbar() {
                     }}
                 >
                     <img
-                        src={isOpen ? "/logo.jpg" : "/logo-white.png"}
+                        src={isDarkTheme ? "/logo-white.png" : "/logo.jpg"}
                         alt="Archit Associates Logo"
                         className="h-[34px] w-[34px] md:h-[38px] md:w-[38px] object-contain transition-colors duration-300"
                         style={{
@@ -52,7 +71,7 @@ export default function Navbar() {
                             outline: 'none',
                         }}
                     />
-                    <span className={`font-heading font-bold text-lg md:text-xl tracking-[-0.02em] transition-colors duration-300 ${isOpen ? "text-black" : "text-white"}`}>
+                    <span className={`font-heading font-bold text-lg md:text-xl tracking-[-0.02em] transition-colors duration-300 ${isDarkTheme ? "text-white" : "text-black"}`}>
                         Archit Associates
                     </span>
                 </Link>
@@ -74,8 +93,8 @@ export default function Navbar() {
                             <span
                                 className={`text-[15px] font-medium tracking-wide transition-colors duration-200 ${
                                     isActive(link.href)
-                                        ? "text-white"
-                                        : "text-white/60 group-hover:text-white"
+                                        ? (isDarkTheme ? "text-white" : "text-black")
+                                        : (isDarkTheme ? "text-white/70 group-hover:text-white" : "text-black/60 group-hover:text-black")
                                 }`}
                             >
                                 {link.name}
@@ -83,12 +102,12 @@ export default function Navbar() {
 
                             {/* Active underline */}
                             {isActive(link.href) && (
-                                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-white" />
+                                <span className={`absolute -bottom-1 left-0 w-full h-[2px] ${isDarkTheme ? "bg-white" : "bg-black"}`} />
                             )}
 
                             {/* Hover underline animation */}
                             {!isActive(link.href) && (
-                                <span className="absolute -bottom-1 left-0 h-[2px] bg-white w-0 group-hover:w-full transition-all duration-300 ease-out" />
+                                <span className={`absolute -bottom-1 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-300 ease-out ${isDarkTheme ? "bg-white" : "bg-black"}`} />
                             )}
                         </Link>
                     ))}
@@ -96,7 +115,7 @@ export default function Navbar() {
 
                 {/* Mobile Menu Button */}
                 <button
-                    className={`md:hidden relative z-[70] p-2 transition-colors duration-300 ${isOpen ? "text-black" : "text-white"}`}
+                    className={`md:hidden relative z-[70] p-2 transition-colors duration-300 ${isDarkTheme ? "text-white" : "text-black"}`}
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {isOpen ? <X size={24} /> : <Menu size={24} />}
