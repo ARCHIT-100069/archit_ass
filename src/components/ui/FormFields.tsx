@@ -175,7 +175,12 @@ export function FormSelect({
                             borderRadius: '10px',
                         }}
                     >
-                        <div className="max-h-60 overflow-y-auto py-1">
+                        <div 
+                            className="max-h-[300px] overflow-y-auto py-1 overscroll-contain"
+                            onWheel={(e) => e.stopPropagation()}
+                            onTouchMove={(e) => e.stopPropagation()}
+                            style={{ WebkitOverflowScrolling: 'touch' }}
+                        >
                             {options.map((opt) => (
                                 <button
                                     key={opt.value}
