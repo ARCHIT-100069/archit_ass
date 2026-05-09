@@ -14,20 +14,42 @@ const projectTypes = [
     { value: "other", label: "Other" },
 ];
 
-const categoryOptions = productCatalog.map((cat) => ({
-    value: cat.id,
-    label: cat.title,
-}));
+const categoryOptions = [
+    ...productCatalog.map((cat) => ({
+        value: cat.id,
+        label: cat.title,
+    })),
+    { value: "others", label: "Others" }
+];
 
 export default function EnquiryFormClient() {
-    const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+    const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus("submitting");
-        setTimeout(() => {
-            setStatus("success");
-        }, 1800);
+        
+        const form = e.target as HTMLFormElement;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        data.isQuotation = "true";
+
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                setStatus("success");
+            } else {
+                setStatus("error");
+            }
+        } catch (error) {
+            console.error(error);
+            setStatus("error");
+        }
     };
 
     if (status === "success") {
@@ -124,6 +146,11 @@ export default function EnquiryFormClient() {
 
             {/* Submit */}
             <div className="pt-2">
+                {status === "error" && (
+                    <div className="mb-4 p-4 rounded-xl bg-red-50 border border-red-100 text-red-600 text-[14px] text-center font-medium">
+                        Failed to send quotation request. Please try again.
+                    </div>
+                )}
                 <button
                     type="submit"
                     disabled={status === "submitting"}
