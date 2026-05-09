@@ -17,8 +17,7 @@ const companies = [
   { name: "NCCBM", logo: "/clients/NCCBM.png" },
   { name: "Tiki Tar and Shell India Pvt Limited", logo: "/clients/Tikitar.png" },
   { name: "TP Build Tech", logo: "/clients/tpbuildtech 1617553563873.jfif" },
-  { name: "KEC International", logo: "/clients/kec.png" },
-  { name: "VS Engineering", logo: null }
+  { name: "KEC International", logo: "/clients/kec.png" }
 ];
 
 export default function PrimeCustomers() {
