@@ -43,8 +43,7 @@ export default function ContactPage() {
                                 <div>
                                     <h3 className="font-semibold mb-1 text-base tracking-tight">Address</h3>
                                     <p className="text-neutral-900/60 text-[14px] leading-relaxed">
-                                        A 242, Jahangir Puri<br />
-                                        Near Kali Mandir, Delhi - 110033
+                                        New Delhi - 110033
                                     </p>
                                 </div>
                             </div>
