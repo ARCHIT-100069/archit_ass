@@ -27,26 +27,15 @@ export const productCatalog: ProductCategory[] = [
                 title: "Dimensional Inspection Series",
                 products: [
                     { name: "Toe Gap Gauges", image: "/products/toe-gap-gauge.png" },
-                    { name: "Insert Location Gauges" },
-                    { name: "Rail Seat Slope Gauges (1 in 20)" },
-                    { name: "Camber & Wind Gauges" },
-                ],
-            },
-            {
-                title: "Master Reference Series",
-                products: [
-                    { name: "Master Reference Gauges" },
                     { name: "Digital Master Gauges", image: "/products/digital-master-gauge.png" },
-                    { name: "Gauge Checking Level Tables" },
-                    { name: "Calibration Standards" },
-                ],
-            },
-            {
-                title: "Digital Measurement Series",
-                products: [
-                    { name: "Digital Rail Profile Gauges" },
-                    { name: "Track Geometry Inspection Tools" },
-                    { name: "Data Logging Inspection Devices" },
+                    { name: "Toe Pin Gauge and Master Gauge", image: "/final_images/Toe pin gauge and master gauge _final.png" },
+                    { name: "Toe Pin Gap Gauge", image: "/final_images/toe_pin_gap_gauge_final.png" },
+                    { name: "Stencils as per Requirement", image: "/final_images/stencils as per requirement.png" },
+                    { name: "Sleeper Checking Gauges", image: "/final_images/sleeper_checking_gauges_final.png" },
+                    { name: "RT3705 Inspection Gauge", image: "/final_images/rt3705 inspection gauge.png" },
+                    { name: "RT381 Insert Checking Gauge", image: "/final_images/RT381 instert_checking gauge.png" },
+                    { name: "Bench Bolt and Nut", image: "/final_images/bench bolt and nut .png" },
+                    { name: "Assorted Gauges", image: "/final_images/assorted_gauges .png" },
                 ],
             },
         ],
@@ -100,7 +89,7 @@ export const productCatalog: ProductCategory[] = [
                     { name: "Slump Cone & Vee-Bee Apparatus", image: "/products/slump-cone-apparatus.jpg" },
                     { name: "Rebound Hammer", image: "/products/rebound-hammer.png" },
                     { name: "UPV Tester", image: "/products/upv-tester.jpg" },
-                    { name: "RCPT Apparatus", image: "/products/rcpt-apparatus.png" },
+                    { name: "RCPT Apparatus", image: "/final_images/rcpt_final_2.png" },
                 ],
             },
             {
