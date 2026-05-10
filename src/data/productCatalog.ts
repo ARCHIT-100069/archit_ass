@@ -90,6 +90,9 @@ export const productCatalog: ProductCategory[] = [
                     { name: "Rebound Hammer", image: "/products/rebound-hammer.png" },
                     { name: "UPV Tester", image: "/products/upv-tester.jpg" },
                     { name: "RCPT Apparatus", image: "/final_images/rcpt_final_2.png" },
+                    { name: "Cement Autoclave", image: "/final_images/cement autoclave_final.png" },
+                    { name: "Mortar Mixer", image: "/final_images/mortar_mixer_final.png" },
+                    { name: "Flow Table", image: "/final_images/flow_table_final.png" },
                 ],
             },
             {
