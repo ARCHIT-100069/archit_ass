@@ -181,9 +181,9 @@ export const productCatalog: ProductCategory[] = [
         ],
     },
     {
-        id: "environmental-lab-utility",
+        id: "general-lab-utility",
         number: 7,
-        title: "Environmental & Lab Utility Equipment",
+        title: "General Lab Utility Equipment",
         description: "Environmental monitoring instruments, storage solutions, cleaning equipment, and lab utilities.",
         subcategories: [
             {
@@ -196,6 +196,10 @@ export const productCatalog: ProductCategory[] = [
                     { name: "Fluorescent Lighting Unit (FLU)", image: "/products/flu.png" },
                     { name: "Ultrasonic Cleaners", image: "/products/ultrasonic-cleaner.jpg" },
                     { name: "Sample Collection Bags", image: "/products/sample-collection-bag.jpg" },
+                    { name: "Digital Vernier Caliper", image: "/final_images/Digital Vernier Calipper_final.png" },
+                    { name: "Digital Micrometer", image: "/final_images/Digital Micrometer_final.png" },
+                    { name: "Laser Digital Meter", image: "/final_images/Laser Distance Meter_final.png" },
+                    { name: "General and Heavy Duty Drill Machine", image: "/final_images/General Heavy Duty Drill Machines_final.png" },
                 ],
             },
         ],
