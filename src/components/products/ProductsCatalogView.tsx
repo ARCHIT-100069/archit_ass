@@ -23,15 +23,15 @@ export default function ProductsCatalogView() {
     return (
         <div>
             {/* Category Tabs Selector */}
-            <div className="flex flex-wrap gap-3 mb-12 pb-6 border-b border-neutral-200">
+            <div className="flex overflow-x-auto md:flex-wrap snap-x snap-mandatory scrollbar-hide gap-3 mb-12 pb-6 border-b border-neutral-200">
                 {categories.map((category) => (
                     <button
                         key={category.id}
                         onClick={() => setSelectedCategoryId(category.id)}
-                        className={`px-5 py-2.5 text-sm md:text-[15px] font-medium transition-all duration-300 rounded-full ${
+                        className={`flex-shrink-0 snap-start px-6 py-3 md:py-2.5 text-[15px] font-medium transition-all duration-300 rounded-full ${
                             selectedCategoryId === category.id
-                                ? "bg-neutral-900 text-white shadow-md scale-105"
-                                : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 hover:text-black hover:scale-105"
+                                ? "bg-black text-white shadow-md scale-100 md:scale-105"
+                                : "bg-white border border-neutral-200 text-neutral-800 hover:border-neutral-400 hover:bg-neutral-50 scale-100"
                         }`}
                     >
                         {category.title}
