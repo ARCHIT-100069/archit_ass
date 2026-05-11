@@ -13,7 +13,7 @@ export default function Hero() {
                 muted
                 loop
                 playsInline
-                preload="none"
+                preload="auto"
                 poster="/logo.jpg"
                 className="absolute inset-0 w-full h-full object-cover z-0"
             >

@@ -29,6 +29,8 @@ export default function ProductCard({ product }: { product: Product }) {
                     src={imageSrc}
                     alt={product.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                    quality={85}
                     className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                     onError={() => setImageSrc("/product-placeholder.svg")}
                 />

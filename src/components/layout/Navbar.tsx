@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -57,20 +58,16 @@ export default function Navbar() {
                         window.location.href = "/";
                     }}
                 >
-                    <img
-                        src={isDarkTheme ? "/logo-white.png" : "/logo.jpg"}
-                        alt="Archit Associates Logo"
-                        className="h-[34px] w-[34px] md:h-[38px] md:w-[38px] object-contain transition-colors duration-300"
-                        style={{
-                            background: 'transparent',
-                            border: 'none',
-                            boxShadow: 'none',
-                            padding: 0,
-                            margin: 0,
-                            borderRadius: 0,
-                            outline: 'none',
-                        }}
-                    />
+                    <div className="relative h-[34px] w-[34px] md:h-[38px] md:w-[38px]">
+                        <Image
+                            src={isDarkTheme ? "/logo-white.png" : "/logo.jpg"}
+                            alt="Archit Associates Logo"
+                            fill
+                            sizes="38px"
+                            priority
+                            className="object-contain transition-colors duration-300"
+                        />
+                    </div>
                     <span className={`font-heading font-bold text-lg md:text-xl tracking-[-0.02em] transition-colors duration-300 ${isDarkTheme ? "text-white" : "text-black"}`}>
                         Archit Associates
                     </span>
