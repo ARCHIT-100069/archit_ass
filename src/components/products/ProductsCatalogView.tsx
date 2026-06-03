@@ -1,14 +1,33 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { productCatalog, ProductItem } from "@/data/productCatalog";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
+
+// --- Types ---
+interface Product {
+    id: string;
+    category_id: string;
+    name: string;
+    image_url: string | null;
+    subcategory: string | null;
+    order_index: number;
+}
+
+interface Category {
+    id: string;
+    number: number;
+    name: string;
+    description: string;
+    slug: string;
+    products: Product[];
+}
 
 // --- Subcomponents for the Editorial Style ---
 
-function ProductCard({ product, index }: { product: ProductItem; index: number }) {
-    const [imgSrc, setImgSrc] = useState(product.image ?? null);
+function ProductCard({ product, index }: { product: Product; index: number }) {
+    const [imgSrc, setImgSrc] = useState(product.image_url ?? null);
     const router = useRouter();
 
     const handleQuotation = (e: React.MouseEvent) => {
@@ -67,20 +86,42 @@ function ProductCard({ product, index }: { product: ProductItem; index: number }
 // --- Main Component ---
 
 export default function ProductsCatalogView() {
-    const categories = productCatalog;
-    const [selectedCategoryId, setSelectedCategoryId] = useState(
-        categories.length > 0 ? categories[0].id : ''
-    );
-    // filter can be "ALL" or a specific subcategory title
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
     const [activeFilter, setActiveFilter] = useState("ALL");
     const [currentPage, setCurrentPage] = useState(1);
 
-    if (!categories.length) {
-        return <div className="p-8 text-center text-neutral-500 uppercase tracking-widest text-xs">No products available.</div>;
-    }
+    useEffect(() => {
+        async function loadData() {
+            try {
+                const { data, error } = await supabase
+                    .from('categories')
+                    .select('*, products(*)')
+                    .order('number');
+                
+                if (error) throw error;
 
-    const selectedCategory = categories.find(c => c.id === selectedCategoryId);
-    
+                if (data && data.length > 0) {
+                    // Sort products within each category manually if nested ordering has issues
+                    data.forEach(cat => {
+                        if (cat.products) {
+                            cat.products.sort((a: Product, b: Product) => a.order_index - b.order_index);
+                        }
+                    });
+                    
+                    setCategories(data);
+                    setSelectedCategoryId(data[0].id);
+                }
+            } catch (err) {
+                console.error('Error fetching categories:', err);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        loadData();
+    }, []);
+
     // Reset filters and pagination when category changes
     const handleCategorySelect = (id: string) => {
         setSelectedCategoryId(id);
@@ -88,23 +129,42 @@ export default function ProductsCatalogView() {
         setCurrentPage(1);
     };
 
-    if (!selectedCategory) return null;
+    const selectedCategory = categories.find(c => c.id === selectedCategoryId);
 
-    // Determine subcategories for filters
-    const subcategories = selectedCategory.subcategories;
-    const isFlat = subcategories.length === 1 && subcategories[0].title === "Products";
-    
     // Get all products to show based on the active filter
     const displayedProducts = useMemo(() => {
-        let products: ProductItem[] = [];
+        if (!selectedCategory) return [];
+        const prods = selectedCategory.products || [];
         if (activeFilter === "ALL") {
-            subcategories.forEach(sub => products.push(...sub.products));
+            return prods;
         } else {
-            const sub = subcategories.find(s => s.title === activeFilter);
-            if (sub) products = sub.products;
+            return prods.filter(p => p.subcategory === activeFilter);
         }
-        return products;
-    }, [subcategories, activeFilter]);
+    }, [selectedCategory, activeFilter]);
+
+    if (isLoading) {
+        return (
+            <div className="min-h-[60vh] flex items-center justify-center w-full">
+                <div className="text-neutral-400 uppercase tracking-widest text-xs animate-pulse">Loading products...</div>
+            </div>
+        );
+    }
+
+    if (!categories.length) {
+        return <div className="p-8 text-center text-neutral-500 uppercase tracking-widest text-xs w-full">No products available.</div>;
+    }
+
+    if (!selectedCategory) return null;
+
+    // Determine subcategories for filters based on the products
+    const subcategorySet = new Set<string>();
+    selectedCategory.products?.forEach(p => {
+        if (p.subcategory) subcategorySet.add(p.subcategory);
+    });
+    const subcategories = Array.from(subcategorySet).sort();
+    
+    // If there are no specific subcategories, it is flat
+    const isFlat = subcategories.length === 0;
 
     const ITEMS_PER_PAGE = 12;
     const totalPages = Math.ceil(displayedProducts.length / ITEMS_PER_PAGE);
@@ -119,7 +179,7 @@ export default function ProductsCatalogView() {
     return (
         <div className="flex flex-col md:flex-row min-h-[calc(100vh-80px)] w-full relative">
             
-            {/* Mobile Category Selector (Dropdown or simple scroll) */}
+            {/* Mobile Category Selector */}
             <div className="md:hidden w-full border-b border-neutral-200 bg-white sticky top-[72px] z-30">
                 <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide py-4 px-4 gap-6">
                     {categories.map((category) => (
@@ -133,7 +193,7 @@ export default function ProductsCatalogView() {
                             }`}
                         >
                             <span className="text-neutral-300 mr-1.5">|{formatNumber(category.number)}|</span> 
-                            {category.title}
+                            {category.name}
                         </button>
                     ))}
                 </div>
@@ -158,12 +218,11 @@ export default function ProductsCatalogView() {
                                 }`}>
                                     |{formatNumber(category.number)}|
                                 </span> 
-                                <span className="pt-[1px]">{category.title}</span>
+                                <span className="pt-[1px]">{category.name}</span>
                             </button>
                         ))}
                     </div>
                 </div>
-                
             </div>
 
             {/* Right Content Area */}
@@ -171,10 +230,10 @@ export default function ProductsCatalogView() {
                 
                 {/* Filter Row Header */}
                 <div className="bg-white border-b border-neutral-200/60 transition-all">
-                    {/* Header info (Optional - showing category desc) */}
+                    {/* Header info */}
                     <div className="px-6 md:px-10 pt-8 pb-4">
                         <h1 className="text-[14px] font-medium uppercase tracking-[0.06em] text-black mb-2">
-                            {selectedCategory.title}
+                            {selectedCategory.name}
                         </h1>
                         <p className="text-[12px] text-neutral-500 tracking-wide max-w-2xl lowercase first-letter:uppercase">
                             {selectedCategory.description}
@@ -196,15 +255,15 @@ export default function ProductsCatalogView() {
                             </button>
                             {subcategories.map((sub) => (
                                 <button
-                                    key={sub.title}
-                                    onClick={() => { setActiveFilter(sub.title); setCurrentPage(1); }}
+                                    key={sub}
+                                    onClick={() => { setActiveFilter(sub); setCurrentPage(1); }}
                                     className={`px-4 py-2 text-[11px] uppercase tracking-[0.08em] whitespace-nowrap transition-colors border ${
-                                        activeFilter === sub.title
+                                        activeFilter === sub
                                             ? "bg-black text-white border-black"
                                             : "bg-transparent text-neutral-600 border-neutral-200 hover:border-black hover:text-black"
                                     }`}
                                 >
-                                    {sub.title}
+                                    {sub}
                                 </button>
                             ))}
                         </div>
@@ -217,7 +276,7 @@ export default function ProductsCatalogView() {
                         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[1px]">
                             {paginatedProducts.map((product, index) => (
                                 <ProductCard 
-                                    key={`${product.name}-${index}`} 
+                                    key={`${product.id}-${index}`} 
                                     product={product} 
                                     index={index} 
                                 />
