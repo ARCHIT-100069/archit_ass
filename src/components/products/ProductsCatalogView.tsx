@@ -106,6 +106,13 @@ export default function ProductsCatalogView() {
         return products;
     }, [subcategories, activeFilter]);
 
+    const ITEMS_PER_PAGE = 12;
+    const totalPages = Math.ceil(displayedProducts.length / ITEMS_PER_PAGE);
+    const paginatedProducts = displayedProducts.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+    );
+
     // Format number to '01', '02', etc.
     const formatNumber = (num: number) => num.toString().padStart(2, '0');
 
@@ -168,8 +175,8 @@ export default function ProductsCatalogView() {
             {/* Right Content Area */}
             <div className="flex-1 flex flex-col w-full bg-white relative">
                 
-                {/* Sticky Filter Row */}
-                <div className="sticky top-[125px] md:top-[80px] bg-white z-20 border-b border-neutral-200/60 transition-all">
+                {/* Filter Row Header */}
+                <div className="bg-white border-b border-neutral-200/60 transition-all">
                     {/* Header info (Optional - showing category desc) */}
                     <div className="px-6 md:px-10 pt-8 pb-4">
                         <h1 className="text-[14px] font-medium uppercase tracking-[0.06em] text-black mb-2">
@@ -214,23 +221,12 @@ export default function ProductsCatalogView() {
                 <div className="flex-1 bg-neutral-200">
                     {displayedProducts.length > 0 ? (
                         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[1px]">
-                            {displayedProducts.map((product, index) => (
+                            {paginatedProducts.map((product, index) => (
                                 <ProductCard 
                                     key={`${product.name}-${index}`} 
                                     product={product} 
                                     index={index} 
                                 />
-                            ))}
-                            
-                            {/* Fill empty cells to maintain grid lines if needed */}
-                            {Array.from({ length: (4 - (displayedProducts.length % 4)) % 4 }).map((_, i) => (
-                                <div key={`empty-${i}`} className="bg-white hidden xl:block" />
-                            ))}
-                            {Array.from({ length: (3 - (displayedProducts.length % 3)) % 3 }).map((_, i) => (
-                                <div key={`empty-lg-${i}`} className="bg-white hidden lg:block xl:hidden" />
-                            ))}
-                            {Array.from({ length: (2 - (displayedProducts.length % 2)) % 2 }).map((_, i) => (
-                                <div key={`empty-sm-${i}`} className="bg-white block lg:hidden" />
                             ))}
                         </div>
                     ) : (
@@ -241,19 +237,30 @@ export default function ProductsCatalogView() {
                 </div>
 
                 {/* Visual Pagination */}
-                {displayedProducts.length > 0 && (
+                {totalPages > 1 && (
                     <div className="bg-white border-t border-neutral-200/60 p-6 md:px-10 flex items-center justify-between mt-auto">
                         <div className="flex gap-4 text-[12px] font-medium tracking-widest">
-                            <button className="underline underline-offset-4 decoration-1">1</button>
-                            <button className="text-neutral-400 hover:text-black transition-colors">2</button>
-                            <button className="text-neutral-400 hover:text-black transition-colors">3</button>
+                            {Array.from({ length: totalPages }).map((_, i) => (
+                                <button 
+                                    key={i + 1}
+                                    onClick={() => setCurrentPage(i + 1)}
+                                    className={`${currentPage === i + 1 ? "underline underline-offset-4 decoration-1" : "text-neutral-400 hover:text-black transition-colors"}`}
+                                >
+                                    {i + 1}
+                                </button>
+                            ))}
                         </div>
-                        <button className="text-[11px] uppercase tracking-[0.08em] text-neutral-400 hover:text-black transition-colors flex items-center">
-                            Next
-                            <svg className="w-3 h-3 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </button>
+                        {currentPage < totalPages && (
+                            <button 
+                                onClick={() => setCurrentPage(prev => prev + 1)}
+                                className="text-[11px] uppercase tracking-[0.08em] text-neutral-400 hover:text-black transition-colors flex items-center"
+                            >
+                                Next
+                                <svg className="w-3 h-3 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </button>
+                        )}
                     </div>
                 )}
             </div>
