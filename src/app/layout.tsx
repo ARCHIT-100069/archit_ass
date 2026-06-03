@@ -19,6 +19,7 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import Preloader from "@/components/layout/Preloader";
 
 import LoadingScreen from "@/components/layout/LoadingScreen";
+import GlobalRedirect from "@/components/layout/GlobalRedirect";
 
 export default function RootLayout({
   children,
@@ -42,6 +43,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${playfair.variable} ${inter.className}`}>
         <Preloader />
         <LoadingScreen />
+        <GlobalRedirect />
         <SmoothScroll>
           <Navbar />
           <main className="min-h-screen">{children}</main>
