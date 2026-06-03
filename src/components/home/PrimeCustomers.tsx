@@ -23,8 +23,8 @@ export default async function PrimeCustomers() {
   }
 
   return (
-    <section className="py-20 md:py-32 bg-white overflow-hidden relative">
-      <div className="container mx-auto px-4 md:px-6 mb-16 text-center">
+    <section className="pt-8 pb-16 md:py-32 bg-white overflow-hidden relative">
+      <div className="container mx-auto px-4 md:px-6 mb-12 md:mb-16 text-center">
         <span className="text-[11px] font-semibold text-neutral-400 uppercase tracking-[0.15em] block mb-3">
           Trusted By Industry Leaders
         </span>

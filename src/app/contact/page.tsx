@@ -99,7 +99,7 @@ export default function ContactPage() {
                         <h2 className="font-heading text-2xl font-bold mb-2 tracking-[-0.02em]">Send us a message</h2>
                         <p className="text-[14px] text-neutral-900/55 mb-8">
                             For general inquiries only. Need a product quote?{" "}
-                            <Link href="/enquiry" className="text-black underline underline-offset-4 hover:text-neutral-600 transition-colors">
+                            <Link href="/request-quote" className="text-black underline underline-offset-4 hover:text-neutral-600 transition-colors">
                                 Request a Quote →
                             </Link>
                         </p>

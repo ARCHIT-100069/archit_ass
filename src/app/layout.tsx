@@ -40,7 +40,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${playfair.variable} ${inter.className}`}>
+      <body className={`${inter.variable} ${playfair.variable} ${inter.className} overflow-x-hidden relative w-full`}>
         <Preloader />
         <LoadingScreen />
         <GlobalRedirect />

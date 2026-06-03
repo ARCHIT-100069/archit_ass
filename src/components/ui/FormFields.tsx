@@ -25,7 +25,7 @@ export function FormInput({
         <div>
             <label
                 htmlFor={name}
-                className="block text-[11px] font-semibold text-neutral-400 uppercase tracking-[0.12em] mb-2"
+                className="block text-[12px] md:text-[11px] font-semibold text-neutral-400 uppercase tracking-[0.12em] mb-2"
             >
                 {label}
                 {required && <span className="text-red-400 ml-0.5">*</span>}
@@ -63,7 +63,7 @@ export function FormTextarea({
         <div>
             <label
                 htmlFor={name}
-                className="block text-[11px] font-semibold text-neutral-400 uppercase tracking-[0.12em] mb-2"
+                className="block text-[12px] md:text-[11px] font-semibold text-neutral-400 uppercase tracking-[0.12em] mb-2"
             >
                 {label}
                 {required && <span className="text-red-400 ml-0.5">*</span>}
@@ -116,7 +116,7 @@ export function FormSelect({
         <div>
             <label
                 htmlFor={name}
-                className="block text-[11px] font-semibold text-neutral-400 uppercase tracking-[0.12em] mb-2"
+                className="block text-[12px] md:text-[11px] font-semibold text-neutral-400 uppercase tracking-[0.12em] mb-2"
             >
                 {label}
                 {required && <span className="text-red-400 ml-0.5">*</span>}
@@ -235,7 +235,7 @@ export function FormFile({
         <div>
             <label
                 htmlFor={name}
-                className="block text-[11px] font-semibold text-neutral-400 uppercase tracking-[0.12em] mb-2"
+                className="block text-[12px] md:text-[11px] font-semibold text-neutral-400 uppercase tracking-[0.12em] mb-2"
             >
                 {label}
                 {required && <span className="text-red-400 ml-0.5">*</span>}

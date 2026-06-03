@@ -24,10 +24,10 @@ export default function CategoryGrid() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.5, delay: index * 0.07 }}
                                 viewport={{ once: true }}
-                                className="relative h-full bg-white border border-neutral-200/80 rounded-[14px] p-8 md:p-9 pl-9 md:pl-10 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.12)] hover:border-neutral-300"
+                                className="relative h-full bg-white border border-neutral-200/80 rounded-[14px] p-6 pl-8 md:p-9 md:pl-10 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_-12px_rgba(0,0,0,0.12)] hover:border-neutral-300"
                             >
                                 {/* Left accent line */}
-                                <div className="absolute left-0 top-8 bottom-8 w-[3px] rounded-full bg-neutral-200 group-hover:bg-neutral-900 transition-colors duration-300" />
+                                <div className="absolute left-0 top-6 bottom-6 md:top-8 md:bottom-8 w-[3px] rounded-full bg-neutral-200 group-hover:bg-neutral-900 transition-colors duration-300" />
 
                                 <div className="flex justify-between items-start mb-4">
                                     <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-300">

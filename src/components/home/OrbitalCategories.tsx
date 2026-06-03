@@ -105,9 +105,9 @@ export default function OrbitalCategories() {
             {/* =========================================
                 MOBILE & TABLET VIEW (Responsive Grid)
                ========================================= */}
-            <div className="md:hidden container mx-auto px-4 sm:px-6 py-16">
+            <div className="md:hidden container mx-auto px-4 sm:px-6 py-8">
                 {/* Mobile Section Label */}
-                <div className="text-center mb-8 px-2 relative z-10">
+                <div className="text-center mb-6 px-2 relative z-10">
                     <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-neutral-400">
                         What We Do
                     </span>

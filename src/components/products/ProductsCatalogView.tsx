@@ -59,7 +59,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
                 {/* Circular Hover Button */}
                 <button 
-                    className="absolute bottom-4 right-4 w-10 h-10 bg-black text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 hover:scale-105"
+                    className="absolute bottom-4 right-4 w-10 h-10 bg-black text-white rounded-full flex items-center justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 hover:scale-105"
                     onClick={handleQuotation}
                     aria-label="Request Quote"
                 >
@@ -72,10 +72,10 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
             {/* Product Info */}
             <div className="p-4 flex flex-col flex-grow justify-between">
-                <h4 className="text-[12px] font-normal uppercase tracking-[0.06em] text-black leading-tight mb-2">
+                <h4 className="text-[14px] md:text-[12px] font-normal uppercase tracking-[0.06em] text-black leading-tight mb-2">
                     {product.name}
                 </h4>
-                <div className="text-[11px] text-neutral-400 uppercase tracking-widest mt-auto">
+                <div className="text-[12px] md:text-[11px] text-neutral-400 uppercase tracking-widest mt-auto">
                     Request Quote
                 </div>
             </div>
@@ -181,12 +181,12 @@ export default function ProductsCatalogView() {
             
             {/* Mobile Category Selector */}
             <div className="md:hidden w-full border-b border-neutral-200 bg-white sticky top-[72px] z-30">
-                <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide py-4 px-4 gap-6">
+                <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide py-2 px-4 gap-6" style={{ WebkitOverflowScrolling: 'touch' }}>
                     {categories.map((category) => (
                         <button
                             key={category.id}
                             onClick={() => handleCategorySelect(category.id)}
-                            className={`flex-shrink-0 snap-start text-[11px] uppercase tracking-[0.08em] whitespace-nowrap transition-colors ${
+                            className={`flex-shrink-0 snap-start text-[12px] uppercase tracking-[0.08em] whitespace-nowrap transition-colors min-h-[48px] flex items-center ${
                                 selectedCategoryId === category.id
                                     ? "text-black font-medium"
                                     : "text-neutral-400"
