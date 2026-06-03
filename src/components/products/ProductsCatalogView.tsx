@@ -164,12 +164,6 @@ export default function ProductsCatalogView() {
                     </div>
                 </div>
                 
-                {/* Fixed bottom area of sidebar */}
-                <div className="p-8 border-t border-neutral-200/60 mt-auto bg-white">
-                    <button className="text-[11px] uppercase tracking-[0.08em] text-black font-medium hover:text-neutral-500 transition-colors">
-                        Filters +
-                    </button>
-                </div>
             </div>
 
             {/* Right Content Area */}
