@@ -111,7 +111,18 @@ export default function EnquiryFormClient() {
                         required
                     />
                     <FormInput label="Product / Equipment Name" name="productName" placeholder="e.g. Toe Gap Gauge, CBR Machine" required value={defaultProduct} />
-                    <FormInput label="Quantity Required" name="quantity" type="number" placeholder="Enter quantity" required />
+                    <FormInput 
+                        label="Quantity Required" 
+                        name="quantity" 
+                        type="number" 
+                        placeholder="Enter quantity" 
+                        required 
+                        value="1"
+                        min="1"
+                        onBlur={(e) => {
+                            if (Number(e.target.value) < 1) e.target.value = "1";
+                        }}
+                    />
                     <FormInput label="Required Delivery Location" name="deliveryLocation" placeholder="City / Site name" required />
                     <FormSelect
                         label="Project Type"

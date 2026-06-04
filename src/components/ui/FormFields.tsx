@@ -10,6 +10,8 @@ interface FormInputProps {
     required?: boolean;
     disabled?: boolean;
     value?: string;
+    min?: string | number;
+    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export function FormInput({
@@ -20,6 +22,8 @@ export function FormInput({
     required = false,
     disabled = false,
     value,
+    min,
+    onBlur,
 }: FormInputProps) {
     return (
         <div>
@@ -38,6 +42,8 @@ export function FormInput({
                 required={required}
                 disabled={disabled}
                 defaultValue={value}
+                min={min}
+                onBlur={onBlur}
                 className="w-full h-12 border border-neutral-200 rounded-lg px-4 bg-white text-[15px] focus:outline-none focus:ring-1 focus:ring-black/20 focus:border-neutral-400 transition-all placeholder:text-neutral-400 disabled:text-neutral-400 disabled:cursor-not-allowed"
             />
         </div>
