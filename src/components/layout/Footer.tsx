@@ -15,9 +15,10 @@ export default function Footer() {
                         <Image
                             src="https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg"
                             alt="Archit Associates"
-                            width={160}
-                            height={40}
-                            className="h-[40px] w-auto object-contain mb-3"
+                            width={200}
+                            height={50}
+                            className="h-[50px] w-auto object-contain mb-3"
+                            style={{ filter: "brightness(0)" }}
                         />
                         <p className="text-neutral-900/55 text-[14px] leading-[1.7] max-w-xs">
                             Premium quality industrial spares and machinery equipment. Ensuring operational efficiency since inception.
