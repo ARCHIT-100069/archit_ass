@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Send, FileCheck } from "lucide-react";
 import { motion } from "framer-motion";
-import { FormInput, FormTextarea, FormSelect, FormFile } from "@/components/ui/FormFields";
+import { FormInput, FormTextarea, FormSelect } from "@/components/ui/FormFields";
 import { productCatalog } from "@/data/productCatalog";
 
 const projectTypes = [
@@ -34,12 +34,14 @@ export default function EnquiryFormClient() {
         
         const form = e.target as HTMLFormElement;
         const formData = new FormData(form);
-        formData.append('isQuotation', 'true');
+        const data = Object.fromEntries(formData.entries());
+        data.isQuotation = "true";
 
         try {
             const response = await fetch('/api/send-email', {
                 method: 'POST',
-                body: formData // No Content-Type header, browser automatically sets multipart/form-data boundary
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
             });
 
             if (response.ok) {
@@ -72,7 +74,7 @@ export default function EnquiryFormClient() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-14" encType="multipart/form-data">
+        <form onSubmit={handleSubmit} className="space-y-14">
             {/* Section 1: Contact Details */}
             <section>
                 <div className="mb-6">
@@ -147,12 +149,6 @@ export default function EnquiryFormClient() {
                         name="requirementDescription"
                         placeholder="Describe your specific requirements, specifications, or any reference standards..."
                         rows={5}
-                    />
-                    <FormFile
-                        label="Upload Attachment — PDF / Drawing / BOQ (Optional)"
-                        name="attachment"
-                        accept=".pdf,.doc,.docx,.dwg,.xlsx,.jpg,.png"
-                    />
                 </div>
             </section>
 

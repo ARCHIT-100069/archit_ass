@@ -1,89 +1,15 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
-import { createClient } from '@supabase/supabase-js';
 
 const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy_key_for_build');
 
 export async function POST(request: Request) {
   try {
-    const contentType = request.headers.get('content-type') || '';
-    let data: any = {};
-    let file: File | null = null;
-    
-    if (contentType.includes('multipart/form-data')) {
-        console.log('Received multipart/form-data request');
-        const formData = await request.formData();
-        
-        const possibleFile = formData.get('attachment');
-        console.log('Raw attachment value type:', typeof possibleFile);
-        console.log('Raw attachment value:', possibleFile);
-        
-        // In Next.js, File objects from FormData have name, size, type, and arrayBuffer()
-        if (possibleFile && typeof possibleFile === 'object' && 'name' in possibleFile) {
-            const uploadedFile = possibleFile as File;
-            if (uploadedFile.size > 0) {
-                file = uploadedFile;
-                console.log(`File extracted: ${file.name}, Size: ${file.size} bytes`);
-            } else {
-                console.log('File was attached but size is 0 (empty file).');
-            }
-        } else {
-            console.log('No valid file object found in attachment field.');
-        }
-
-        for (const [key, value] of formData.entries()) {
-            if (key !== 'attachment') {
-                data[key] = value;
-            }
-        }
-    } else {
-        data = await request.json();
-    }
-
+    const data = await request.json();
     const isQuotation = data.isQuotation === 'true' || data.isQuotation === true || !!data.productCategory;
     
     if (isQuotation) {
       console.log('QUOTE REQUEST RECEIVED:', data);
-    }
-
-    let resendAttachments = [];
-    let uploadedFileUrl = null;
-
-    if (file && file.size > 0) {
-        if (file.size <= 3.5 * 1024 * 1024) { // Direct attachment for < 3.5MB
-            const arrayBuffer = await file.arrayBuffer();
-            const buffer = Buffer.from(arrayBuffer);
-            resendAttachments.push({
-                filename: file.name,
-                content: buffer.toString('base64'),
-            });
-        } else {
-            // Upload to Supabase quote-attachments bucket
-            if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-                const supabase = createClient(
-                    process.env.NEXT_PUBLIC_SUPABASE_URL,
-                    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-                );
-                
-                const uniqueFileName = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`;
-                
-                const { data: uploadData, error: uploadError } = await supabase.storage
-                    .from('quote-attachments')
-                    .upload(uniqueFileName, file, {
-                        contentType: file.type || 'application/octet-stream',
-                        upsert: false
-                    });
-                    
-                if (!uploadError && uploadData) {
-                    const { data: publicUrlData } = supabase.storage
-                        .from('quote-attachments')
-                        .getPublicUrl(uniqueFileName);
-                    uploadedFileUrl = publicUrlData.publicUrl;
-                } else {
-                    console.error("Supabase attachment upload error:", uploadError);
-                }
-            }
-        }
     }
 
     let finalSubject;
@@ -104,8 +30,6 @@ export async function POST(request: Request) {
         <p><strong>Delivery Location:</strong> ${data.deliveryLocation || 'N/A'}</p>
         <p><strong>Project Type:</strong> ${data.projectType || 'N/A'}</p>
         <p><strong>Requirements / Message:</strong> ${data.requirementDescription || 'N/A'}</p>
-        <hr />
-        ${uploadedFileUrl ? `<p><strong>Attachment:</strong> <a href="${uploadedFileUrl}">${file?.name}</a> (Download Link)</p>` : (resendAttachments.length > 0 ? `<p><strong>Attachment:</strong> ${file?.name} (Attached directly to this email)</p>` : '<p><strong>Attachment:</strong> None</p>')}
       `;
     } else {
       const { name, email, message, subject } = data;
@@ -132,10 +56,6 @@ export async function POST(request: Request) {
       html: htmlContent,
     };
     
-    if (resendAttachments.length > 0) {
-        emailPayload.attachments = resendAttachments;
-    }
-
     const response = await resend.emails.send(emailPayload);
 
     if (response.error) {
