@@ -34,14 +34,12 @@ export default function EnquiryFormClient() {
         
         const form = e.target as HTMLFormElement;
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
-        data.isQuotation = "true";
+        formData.append('isQuotation', 'true');
 
         try {
             const response = await fetch('/api/send-email', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+                body: formData // No Content-Type header, browser automatically sets multipart/form-data boundary
             });
 
             if (response.ok) {
