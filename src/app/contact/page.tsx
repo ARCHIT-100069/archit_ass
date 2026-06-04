@@ -26,7 +26,7 @@ export default function ContactPage() {
                         Contact Us
                     </h1>
                     <p className="text-neutral-900/60 max-w-xl text-lg leading-[1.65]">
-                        Get in touch with our team for general inquiries and support.
+                        Get in touch with our team for general inquiries, lab equipment sourcing, product support, and service requests.
                     </p>
 
                     <div className="w-full h-px bg-neutral-200 mt-10" />
@@ -98,7 +98,7 @@ export default function ContactPage() {
                     <div className="bg-[#fafafa] border border-neutral-200 p-8 md:p-12 rounded-2xl shadow-sm h-fit">
                         <h2 className="font-heading text-2xl font-bold mb-2 tracking-[-0.02em]">Send us a message</h2>
                         <p className="text-[14px] text-neutral-900/55 mb-8">
-                            For general inquiries only. Need a product quote?{" "}
+                            For general inquiries, lab equipment requirements, and service requests. Need a product quote?{" "}
                             <Link href="/request-quote" className="text-black underline underline-offset-4 hover:text-neutral-600 transition-colors">
                                 Request a Quote →
                             </Link>

@@ -20,8 +20,11 @@ export default function Footer() {
                             className="h-[50px] w-auto object-contain mb-3"
                             style={{ filter: "brightness(0)" }}
                         />
-                        <p className="text-neutral-900/55 text-[14px] leading-[1.7] max-w-xs">
+                        <p className="text-neutral-900/55 text-[14px] leading-[1.7] max-w-xs mb-2">
                             Premium quality industrial spares and machinery equipment. Ensuring operational efficiency since inception.
+                        </p>
+                        <p className="text-neutral-900/55 text-[14px] leading-[1.7] max-w-xs font-medium">
+                            Specialists in laboratory equipment supply and industrial testing instruments.
                         </p>
                     </div>
 

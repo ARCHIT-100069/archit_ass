@@ -44,7 +44,7 @@ export default function AboutPage() {
                             Eight Specialized Categories
                         </h2>
                         <p className="text-neutral-900/70 leading-[1.7] text-[16px] md:text-[17px]">
-                            We supply a comprehensive range of products across eight specialized categories — from Railway Sleeper Inspection Gauges and Civil Material Testing Equipment to Industrial Safety & PPE, Surveying Instruments, Pre-Casting Equipment, Chemical & Paint Testing, and General Lab Utility Equipment. Whether you are running a quality control lab, a construction site, or a rail infrastructure project, we have the right equipment for you.
+                            We supply a comprehensive range of products across eight specialized categories — from Railway Sleeper Inspection Gauges and Civil Material Testing Equipment to Industrial Safety & PPE, Surveying Instruments, Pre-Casting Equipment, Chemical & Paint Testing, and General Lab Utility Equipment. Whether you are running a quality control lab, a construction site, or a rail infrastructure project, we have the right equipment for you. We also provide sourcing and supply services for a wide range of laboratory equipment and testing instruments tailored to your specific industry requirements.
                         </p>
                     </section>
 
@@ -57,7 +57,7 @@ export default function AboutPage() {
                             Quality You Can Rely On
                         </h2>
                         <p className="text-neutral-900/70 leading-[1.7] text-[16px] md:text-[17px]">
-                            At Archit Associates, we believe that the right equipment drives operational excellence. Every product we supply is sourced from trusted manufacturers and delivered with reliability and precision. We are committed to building long-term partnerships with our clients by offering dependable equipment, prompt service, and expert guidance.
+                            At Archit Associates, we believe that the right equipment drives operational excellence. Every product we supply is sourced from trusted manufacturers and delivered with reliability and precision. We are committed to building long-term partnerships with our clients by offering dependable equipment, prompt service, and expert guidance. From precision gauges to complete laboratory setups, we help our clients find the right equipment for their exact needs.
                         </p>
                     </section>
 

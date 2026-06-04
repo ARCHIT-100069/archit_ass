@@ -12,7 +12,7 @@ export default function CategoryGrid() {
                 <div className="flex flex-col mb-16 md:mb-20 gap-4">
                     <h2 className="font-heading text-4xl md:text-5xl lg:text-[48px] font-bold tracking-[-0.025em] leading-[1.1]">Our Solutions</h2>
                     <p className="text-neutral-900/60 max-w-2xl text-[16px] leading-[1.65]">
-                        Comprehensive range of industrial spares and machinery equipment designed for durability and performance.
+                        Comprehensive range of industrial spares, laboratory equipment, and machinery designed for durability and performance.
                     </p>
                 </div>
 
