@@ -14,7 +14,7 @@ export default function Hero() {
                 loop
                 playsInline
                 preload="auto"
-                poster="/logo.jpg"
+                poster="https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg"
                 className="absolute inset-0 w-full h-full object-cover z-0"
             >
                 <source src="/hero-video.mp4" type="video/mp4" />
@@ -26,7 +26,7 @@ export default function Hero() {
             {/* Centered Hero Content — top layer */}
             <div className="relative z-20 h-full flex flex-col items-center justify-center px-4 md:px-8 w-full">
 
-                {/* Logo — transparent white PNG, no CSS hacks */}
+                {/* Logo */}
                 <motion.div
                     className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-56 md:h-56 lg:w-72 lg:h-72 mb-4"
                     initial={{ opacity: 0, scale: 0.85 }}
@@ -34,7 +34,7 @@ export default function Hero() {
                     transition={{ duration: 1.4, ease: "easeOut" }}
                 >
                     <Image
-                        src="/logo-white.png"
+                        src="https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg"
                         alt="Archit Associates Logo"
                         fill
                         className="object-contain"

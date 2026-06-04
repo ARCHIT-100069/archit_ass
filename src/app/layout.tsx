@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Archit Associates - Industrial Spares & Equipment",
   description: "Premium industrial business website for Archit Associates.",
   icons: {
-    icon: "/logo.jpg",
+    icon: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg",
   },
 };
 

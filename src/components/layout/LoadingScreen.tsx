@@ -37,10 +37,11 @@ export default function LoadingScreen() {
               User needs to upload logo.png to public folder 
             */}
                         <Image
-                            src="/logo.jpg"
-                            alt="Archit Associates Logo"
-                            fill
-                            className="object-contain"
+                            src="https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg"
+                            alt="Archit Associates"
+                            width={120}
+                            height={40}
+                            className="h-[40px] w-auto object-contain"
                             priority
                         />
                     </motion.div>

@@ -13,11 +13,11 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="md:col-span-1">
                         <Image
-                            src="/logo.jpg"
+                            src="https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg"
                             alt="Archit Associates"
-                            width={60}
-                            height={60}
-                            style={{ objectFit: 'contain', marginBottom: 12, filter: 'brightness(0)' }}
+                            width={160}
+                            height={40}
+                            className="h-[40px] w-auto object-contain mb-3"
                         />
                         <p className="text-neutral-900/55 text-[14px] leading-[1.7] max-w-xs">
                             Premium quality industrial spares and machinery equipment. Ensuring operational efficiency since inception.

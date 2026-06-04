@@ -80,11 +80,11 @@ export default function OrbitalCategories() {
                         style={{ opacity: useTransform(scrollYProgress, [0, 0.05, 0.9, 1], [0.3, 1, 1, 0.3]) }}
                     >
                         <Image
-                            src="/logo.jpg"
+                            src="https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg"
                             alt="Archit Associates"
-                            fill
-                            className="object-contain"
-                            style={{ filter: "brightness(0) saturate(100%)" }}
+                            width={160}
+                            height={40}
+                            className="h-auto w-[60%] object-contain"
                         />
                     </motion.div>
                 </div>

@@ -59,14 +59,14 @@ export default function Navbar() {
                             window.location.href = "/";
                         }}
                     >
-                        <div className="relative h-[34px] w-[34px] min-w-[34px] md:h-[38px] md:w-[38px] md:min-w-[38px]">
+                        <div className="relative flex items-center h-[34px] md:h-[40px]">
                             <Image
-                                src={!isOpen && isDarkTheme ? "/logo-white.png" : "/logo.svg"}
+                                src="https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg"
                                 alt="Archit Associates Logo"
-                                fill
-                                sizes="38px"
+                                width={180}
+                                height={40}
                                 priority
-                                className="object-contain transition-colors duration-300"
+                                className="h-full w-auto object-contain transition-all duration-300"
                             />
                         </div>
                         <span className={`font-heading font-bold text-[17px] md:text-xl tracking-[-0.02em] transition-colors duration-300 truncate ${!isOpen && isDarkTheme ? "text-white" : "text-black"}`}>
