@@ -180,22 +180,28 @@ export default function ProductsCatalogView() {
         <div className="flex flex-col md:flex-row min-h-[calc(100vh-80px)] w-full relative">
             
             {/* Mobile Category Selector */}
-            <div className="md:hidden w-full border-b border-neutral-200 bg-white sticky top-[72px] z-30">
-                <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide py-2 px-4 gap-6" style={{ WebkitOverflowScrolling: 'touch' }}>
-                    {categories.map((category) => (
-                        <button
-                            key={category.id}
-                            onClick={() => handleCategorySelect(category.id)}
-                            className={`flex-shrink-0 snap-start text-[12px] uppercase tracking-[0.08em] whitespace-nowrap transition-colors min-h-[48px] flex items-center ${
-                                selectedCategoryId === category.id
-                                    ? "text-black font-medium"
-                                    : "text-neutral-400"
-                            }`}
-                        >
-                            <span className="text-neutral-300 mr-1.5">|{formatNumber(category.number)}|</span> 
-                            {category.name}
-                        </button>
-                    ))}
+            <div className="md:hidden w-full border-b border-neutral-200 bg-white p-4 sticky top-[72px] z-30">
+                <label htmlFor="mobile-category-select" className="block text-[11px] font-semibold text-neutral-500 uppercase tracking-[0.12em] mb-2">
+                    Select Category
+                </label>
+                <div className="relative">
+                    <select
+                        id="mobile-category-select"
+                        value={selectedCategoryId}
+                        onChange={(e) => handleCategorySelect(e.target.value)}
+                        className="w-full h-14 border border-black rounded-none px-4 bg-white text-[12px] font-medium uppercase tracking-[0.06em] text-black appearance-none focus:outline-none focus:ring-1 focus:ring-black/20 pr-10"
+                    >
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                |{formatNumber(category.number)}| {category.name}
+                            </option>
+                        ))}
+                    </select>
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-black">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
                 </div>
             </div>
 
