@@ -9,9 +9,9 @@ export default function CategoryGrid() {
     return (
         <section className="py-16 md:py-32 bg-white">
             <div className="container mx-auto px-4 md:px-6">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-6">
+                <div className="flex flex-col mb-16 md:mb-20 gap-4">
                     <h2 className="font-heading text-4xl md:text-5xl lg:text-[48px] font-bold tracking-[-0.025em] leading-[1.1]">Our Solutions</h2>
-                    <p className="text-neutral-900/55 max-w-md md:text-right text-[15px] leading-[1.7]">
+                    <p className="text-neutral-900/60 max-w-2xl text-[16px] leading-[1.65]">
                         Comprehensive range of industrial spares and machinery equipment designed for durability and performance.
                     </p>
                 </div>

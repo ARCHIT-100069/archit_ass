@@ -36,30 +36,21 @@ export default async function PrimeCustomers() {
         </p>
       </div>
 
-      <div className="relative w-full overflow-hidden marquee-container flex">
-        {/* We use a custom CSS animation block for the marquee */}
-        <style dangerouslySetInnerHTML={{
-          __html: `
-            @keyframes marquee {
-              0% { transform: translateX(0); }
-              100% { transform: translateX(-50%); }
-            }
-            .animate-marquee {
-              display: flex;
-              width: max-content;
-              animation: marquee 40s linear infinite;
-            }
-            .marquee-container:hover .animate-marquee {
-              animation-play-state: paused;
-            }
-          `
-        }} />
+      <div className="relative w-full overflow-hidden">
+        {/* Left Fade */}
+        <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+        
+        {/* Right Fade */}
+        <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-        <div className="animate-marquee gap-6 px-3">
-          {marqueeCompanies.map((company, index) => (
+        <div 
+          className="flex overflow-x-auto gap-6 px-4 md:px-12 py-4 scrollbar-hide snap-x snap-mandatory"
+          style={{ WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {displayCompanies.map((company, index) => (
             <div
               key={`${company.id || index}-${index}`}
-              className="flex-shrink-0 w-64 md:w-72 bg-white border border-neutral-100 rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center text-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300 group cursor-default h-48 md:h-56"
+              className="flex-shrink-0 snap-start w-64 md:w-72 bg-white border border-neutral-100 rounded-2xl p-6 md:p-8 flex flex-col items-center justify-center text-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.1)] hover:-translate-y-1 transition-all duration-300 group h-48 md:h-56"
             >
               {company.logo_url ? (
                 <div className="relative w-full h-24 md:h-28 mb-4 transition-all duration-300 filter grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100">
