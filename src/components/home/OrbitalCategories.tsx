@@ -82,9 +82,9 @@ export default function OrbitalCategories() {
                         <Image
                             src="https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg"
                             alt="Archit Associates"
-                            width={160}
-                            height={40}
-                            className="h-auto w-[60%] object-contain"
+                            fill
+                            className="object-contain"
+                            style={{ filter: "brightness(0)", padding: "8px" }}
                         />
                     </motion.div>
                 </div>
