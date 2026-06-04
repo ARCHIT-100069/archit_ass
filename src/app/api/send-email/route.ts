@@ -12,10 +12,14 @@ export async function POST(request: Request) {
     
     if (contentType.includes('multipart/form-data')) {
         const formData = await request.formData();
+        
+        const possibleFile = formData.get('attachment');
+        if (possibleFile && typeof possibleFile === 'object' && 'size' in possibleFile) {
+            file = possibleFile as File;
+        }
+
         for (const [key, value] of formData.entries()) {
-            if (key === 'attachment' && value instanceof Blob) {
-                file = value as File;
-            } else {
+            if (key !== 'attachment') {
                 data[key] = value;
             }
         }

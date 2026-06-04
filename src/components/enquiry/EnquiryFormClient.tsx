@@ -72,7 +72,7 @@ export default function EnquiryFormClient() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-14">
+        <form onSubmit={handleSubmit} className="space-y-14" encType="multipart/form-data">
             {/* Section 1: Contact Details */}
             <section>
                 <div className="mb-6">
