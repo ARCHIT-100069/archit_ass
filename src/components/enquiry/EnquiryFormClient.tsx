@@ -149,6 +149,7 @@ export default function EnquiryFormClient() {
                         name="requirementDescription"
                         placeholder="Describe your specific requirements, specifications, or any reference standards..."
                         rows={5}
+                    />
                 </div>
             </section>
 
