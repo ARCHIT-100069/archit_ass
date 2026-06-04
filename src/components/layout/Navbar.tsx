@@ -61,7 +61,7 @@ export default function Navbar() {
                     >
                         <div className="relative h-[34px] w-[34px] min-w-[34px] md:h-[38px] md:w-[38px] md:min-w-[38px]">
                             <Image
-                                src={!isOpen && isDarkTheme ? "/logo-white.png" : "/logo.jpg"}
+                                src={!isOpen && isDarkTheme ? "/logo-white.png" : "/logo.svg"}
                                 alt="Archit Associates Logo"
                                 fill
                                 sizes="38px"
