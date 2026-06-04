@@ -11,11 +11,24 @@ export async function POST(request: Request) {
     let file: File | null = null;
     
     if (contentType.includes('multipart/form-data')) {
+        console.log('Received multipart/form-data request');
         const formData = await request.formData();
         
         const possibleFile = formData.get('attachment');
-        if (possibleFile && typeof possibleFile === 'object' && 'size' in possibleFile) {
-            file = possibleFile as File;
+        console.log('Raw attachment value type:', typeof possibleFile);
+        console.log('Raw attachment value:', possibleFile);
+        
+        // In Next.js, File objects from FormData have name, size, type, and arrayBuffer()
+        if (possibleFile && typeof possibleFile === 'object' && 'name' in possibleFile) {
+            const uploadedFile = possibleFile as File;
+            if (uploadedFile.size > 0) {
+                file = uploadedFile;
+                console.log(`File extracted: ${file.name}, Size: ${file.size} bytes`);
+            } else {
+                console.log('File was attached but size is 0 (empty file).');
+            }
+        } else {
+            console.log('No valid file object found in attachment field.');
         }
 
         for (const [key, value] of formData.entries()) {
