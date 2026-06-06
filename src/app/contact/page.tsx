@@ -82,7 +82,7 @@ export default function ContactPage() {
                         </div>
 
                         {/* Google Map */}
-                        <div className="mt-12 w-full h-64 bg-neutral-100 rounded-xl overflow-hidden grayscale hover:grayscale-0 transition-all duration-500">
+                        <div className="mt-12 w-full h-64 bg-neutral-100 rounded-xl overflow-hidden">
                             <iframe
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.075932594611!2d77.16444787522513!3d28.72451107561498!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d013fc5eda597%3A0x4425d8eda8162d10!2sARCHIT%20ASSOCIATES%20-%20Experts%20in%20Laboratory%20Material%20Testing%20Equipment!5e0!3m2!1sen!2sin!4v1715243555234!5m2!1sen!2sin"
                                 width="100%"
