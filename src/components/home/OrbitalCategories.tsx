@@ -149,12 +149,14 @@ function OrbitalCard({
     const radiusX = 340;
     const radiusY = 220;
 
-    // The scroll drives a full rotation. Each card starts at its offset angle.
-    // scrollYProgress 0→1 maps to 0→360° of rotation
+    // The scroll drives a 3/4 rotation (270°). Each card starts at its offset angle.
+    // scrollYProgress 0→1 maps to 0→270° of rotation — stops one card early
+    // so the cycle ends at "Industrial Safety Equipment" instead of looping
+    // all the way back to "Civil Material Testing".
     const rotation = useTransform(
         scrollProgress,
         [0, 1],
-        [angleOffset, angleOffset + 360]
+        [angleOffset, angleOffset + 270]
     );
 
     // Calculate x, y position from angle
