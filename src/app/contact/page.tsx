@@ -56,6 +56,8 @@ export default function ContactPage() {
                                     <h3 className="font-semibold mb-1 text-base tracking-tight">Phone</h3>
                                     <p className="text-neutral-900/60 text-[14px]">+91 81309 73844</p>
                                     <p className="text-neutral-900/60 text-[14px]">+91 98714 06036</p>
+                                    <p className="text-neutral-900/60 text-[14px]">+91 9810052732</p>
+                                    <p className="text-neutral-900/60 text-[14px]">+91 9810052758</p>
                                 </div>
                             </div>
 
