@@ -67,6 +67,7 @@ export default function Navbar() {
                                 height={40}
                                 priority
                                 className="h-full w-auto object-contain transition-all duration-300"
+                                style={{ filter: !isOpen && isDarkTheme ? "none" : "invert(1)" }}
                             />
                         </div>
                         <span className={`font-heading font-bold text-[17px] md:text-xl tracking-[-0.02em] transition-colors duration-300 truncate ${!isOpen && isDarkTheme ? "text-white" : "text-black"}`}>
