@@ -58,18 +58,6 @@ export const productCatalog: ProductCategory[] = [
                 title: "Stressing & Tensioning Systems",
                 products: [
                     { name: "Hydraulic Jacking Units (500–1000 KN)" },
-                    { name: "Digital Stress Recording Systems" },
-                    { name: "Anchorage & Wedges" },
-                    { name: "HTS Wire Straightening & Cutting Machines" },
-                ],
-            },
-            {
-                title: "Plant & Handling Equipment",
-                products: [
-                    { name: "Spares for Steam Boilers & Curing Systems" },
-                    { name: "Spares for Gantry Cranes (4T/5T)" },
-                    { name: "Vacuum Lifters" },
-                    { name: "Spares for De-moulding Hoists" },
                 ],
             },
         ],
