@@ -1,9 +1,5 @@
 "use client";
 
-// Minimal 1×1 transparent blur placeholder
-const BLUR_DATA_URL =
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
-
 import { motion } from "framer-motion";
 import { Package, ArrowRight } from "lucide-react";
 import Image from "next/image";
@@ -43,7 +39,10 @@ function ProductCardMini({ product, index }: { product: ProductItem; index: numb
         >
             {/* Thumbnail — shown only when image is available */}
             {imgSrc && (
-                <div className="relative w-full h-36 mb-4 rounded-md overflow-hidden bg-white border border-neutral-100">
+                <div
+                    className="relative w-full h-36 mb-4 rounded-md overflow-hidden border border-neutral-100"
+                    style={{ backgroundColor: '#f5f5f5' }}
+                >
                     <Image
                         src={imgSrc}
                         alt={product.name}
@@ -51,8 +50,7 @@ function ProductCardMini({ product, index }: { product: ProductItem; index: numb
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                         quality={85}
                         loading="lazy"
-                        placeholder="blur"
-                        blurDataURL={BLUR_DATA_URL}
+                        placeholder="empty"
                         className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                         onError={() => setImgSrc(null)}
                     />

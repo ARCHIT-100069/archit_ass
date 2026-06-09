@@ -5,9 +5,7 @@ import { motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import Image from "next/image";
 
-// Minimal 1x1 transparent blur placeholder (base64 encoded)
-const BLUR_DATA_URL =
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+
 
 interface Product {
     id: string;
@@ -30,7 +28,10 @@ export default function ProductCard({ product, index }: { product: Product; inde
             viewport={{ once: true }}
             className="group bg-neutral-50 p-6 md:p-8 hover:bg-white border border-transparent hover:border-neutral-200 transition-all duration-300 hover:shadow-sm flex flex-col justify-between h-full cursor-pointer"
         >
-            <div className="relative w-full h-48 mb-4 bg-white rounded-lg overflow-hidden border border-neutral-100">
+            <div
+                className="relative w-full h-48 mb-4 rounded-lg overflow-hidden border border-neutral-100"
+                style={{ backgroundColor: '#f5f5f5' }}
+            >
                 <Image
                     src={imageSrc}
                     alt={product.name}
@@ -39,8 +40,7 @@ export default function ProductCard({ product, index }: { product: Product; inde
                     quality={85}
                     priority={isAboveFold}
                     loading={isAboveFold ? undefined : "lazy"}
-                    placeholder="blur"
-                    blurDataURL={BLUR_DATA_URL}
+                    placeholder="empty"
                     className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                     onError={() => setImageSrc("/product-placeholder.svg")}
                 />
