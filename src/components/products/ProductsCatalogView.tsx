@@ -280,7 +280,7 @@ export default function ProductsCatalogView() {
                 </div>
 
                 {/* Product Grid */}
-                <div className="flex-1 bg-neutral-200">
+                <div className="bg-neutral-200">
                     {displayedProducts.length > 0 ? (
                         <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[1px]">
                             {paginatedProducts.map((product, index) => (
