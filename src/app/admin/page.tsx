@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "@/lib/supabase";
+import Image from "next/image";
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState("categories");
@@ -241,8 +242,10 @@ function ProductsTab({ products, categories, refresh }: { products: any[]; categ
                 {cat.products.map((prod: any) => (
                   <div key={prod.id} className="py-2 flex justify-between items-center">
                     <div className="flex items-center gap-4">
-                      {prod.image_url ? (
-                        <img src={prod.image_url} alt="" className="w-10 h-10 object-contain bg-gray-50 border rounded" />
+                        {prod.image_url ? (
+                          <div className="relative w-10 h-10">
+                            <Image src={prod.image_url} alt="" width={40} height={40} loading="lazy" className="object-contain bg-gray-50 border rounded" />
+                          </div>
                       ) : (
                         <div className="w-10 h-10 bg-gray-200 flex items-center justify-center rounded text-xs text-gray-500">N/A</div>
                       )}
@@ -346,7 +349,7 @@ function CustomersTab({ customers, refresh }: { customers: any[]; refresh: () =>
         {customers.map(cust => (
           <div key={cust.id} className="border rounded-xl p-4 flex flex-col items-center text-center relative group">
             {cust.logo_url ? (
-               <img src={cust.logo_url} alt={cust.name} className="h-16 object-contain mb-3" />
+               <Image src={cust.logo_url} alt={cust.name} width={160} height={64} loading="lazy" className="h-16 w-auto object-contain mb-3" />
             ) : (
                <div className="h-16 w-16 bg-gray-100 rounded-full flex items-center justify-center mb-3 text-gray-400 font-bold">{cust.name[0]}</div>
             )}

@@ -82,7 +82,9 @@ export default function OrbitalCategories() {
                         <Image
                             src="https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg"
                             alt="Archit Associates"
-                            fill
+                            width={80}
+                            height={80}
+                            loading="lazy"
                             className="object-contain"
                             style={{ filter: "brightness(0)", padding: "8px" }}
                         />

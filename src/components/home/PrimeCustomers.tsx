@@ -79,6 +79,7 @@ export default async function PrimeCustomers() {
                     src={company.logo_url}
                     alt={company.name}
                     fill
+                    loading="lazy"
                     style={{ objectFit: "contain" }}
                     sizes="(max-width: 768px) 16rem, 18rem"
                   />

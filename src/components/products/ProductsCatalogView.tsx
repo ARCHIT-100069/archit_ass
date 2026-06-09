@@ -5,6 +5,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
+// Minimal 1×1 transparent blur placeholder
+const BLUR_DATA_URL =
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+
 // --- Types ---
 interface Product {
     id: string;
@@ -50,6 +54,10 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         quality={85}
+                        priority={index < 6}
+                        loading={index < 6 ? undefined : "lazy"}
+                        placeholder="blur"
+                        blurDataURL={BLUR_DATA_URL}
                         className="object-contain p-6 mix-blend-multiply transition-transform duration-700 ease-out group-hover:scale-105"
                         onError={() => setImgSrc(null)}
                     />

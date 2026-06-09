@@ -68,8 +68,8 @@ export default function ProductDetailModal({ product, isOpen, onClose }: Product
                                             src={imageSrc}
                                             alt={product.name}
                                             fill
+                                            loading="lazy"
                                             className="object-contain p-4"
-                                            priority
                                             onError={() => setImageSrc("/product-placeholder.svg")}
                                         />
                                     </div>

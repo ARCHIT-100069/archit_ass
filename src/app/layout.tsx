@@ -29,6 +29,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Preload the hero/logo image — visible on first paint in Preloader + Hero */}
+        <link
+          rel="preload"
+          as="image"
+          href="https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg"
+          fetchPriority="high"
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `

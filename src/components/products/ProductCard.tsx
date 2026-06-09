@@ -1,9 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { Plus } from "lucide-react";
 import Image from "next/image";
+
+// Minimal 1x1 transparent blur placeholder (base64 encoded)
+const BLUR_DATA_URL =
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 
 interface Product {
     id: string;
@@ -13,8 +17,10 @@ interface Product {
     specifications: string[];
 }
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product, index }: { product: Product; index: number }) {
     const [imageSrc, setImageSrc] = useState(product.image || "/product-placeholder.svg");
+    // First 6 cards are likely above or near the fold — give them priority
+    const isAboveFold = index < 6;
 
     return (
         <motion.div
@@ -31,6 +37,10 @@ export default function ProductCard({ product }: { product: Product }) {
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                     quality={85}
+                    priority={isAboveFold}
+                    loading={isAboveFold ? undefined : "lazy"}
+                    placeholder="blur"
+                    blurDataURL={BLUR_DATA_URL}
                     className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                     onError={() => setImageSrc("/product-placeholder.svg")}
                 />
@@ -61,3 +71,4 @@ export default function ProductCard({ product }: { product: Product }) {
         </motion.div>
     );
 }
+
