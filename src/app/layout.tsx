@@ -5,21 +5,80 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-heading", weight: ["400", "500", "600", "700", "800", "900"] });
 
+const BASE_URL = "https://architassociates.com";
+
 export const metadata: Metadata = {
-  title: "Archit Associates - Industrial Spares & Equipment",
-  description: "Premium industrial business website for Archit Associates.",
+  title: {
+    default: "Archit Associates — Industrial Spares & Laboratory Testing Equipment",
+    template: "%s | Archit Associates",
+  },
+  description:
+    "Archit Associates is a New Delhi-based supplier of premium industrial spares, laboratory testing equipment, precision instruments, railway inspection gauges, civil material testing equipment, and industrial safety gear. Serving India's leading infrastructure and manufacturing companies since 2018.",
+  keywords: [
+    "industrial spares supplier India",
+    "laboratory testing equipment Delhi",
+    "railway inspection gauges",
+    "civil material testing equipment",
+    "CBR testing machine",
+    "compression testing machine",
+    "toe gap gauge",
+    "industrial safety equipment",
+    "surveying instruments Delhi",
+    "Archit Associates",
+  ],
+  authors: [{ name: "Archit Associates", url: BASE_URL }],
+  creator: "Archit Associates",
+  metadataBase: new URL(BASE_URL),
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: BASE_URL,
+    siteName: "Archit Associates",
+    title: "Archit Associates — Industrial Spares & Laboratory Testing Equipment",
+    description:
+      "Premium industrial spares, laboratory testing equipment, railway gauges, and precision instruments. Trusted by India's leading infrastructure companies.",
+    images: [
+      {
+        url: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Archit Associates Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Archit Associates — Industrial Spares & Laboratory Testing Equipment",
+    description:
+      "Premium industrial spares, laboratory testing equipment, railway gauges, and precision instruments. Trusted by India's leading infrastructure companies.",
+    images: [
+      "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg",
+    ],
+  },
   icons: {
     icon: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg",
+    shortcut: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg",
   },
 };
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/layout/SmoothScroll";
-import Preloader from "@/components/layout/Preloader";
-
 import LoadingScreen from "@/components/layout/LoadingScreen";
-import GlobalRedirect from "@/components/layout/GlobalRedirect";
 
 export default function RootLayout({
   children,
@@ -29,7 +88,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Preload the hero/logo image — visible on first paint in Preloader + Hero */}
+        {/* Preload the hero/logo image — visible on first paint in LoadingScreen + Hero */}
         <link
           rel="preload"
           as="image"
@@ -48,9 +107,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${playfair.variable} ${inter.className} overflow-x-hidden relative w-full`}>
-        <Preloader />
         <LoadingScreen />
-        <GlobalRedirect />
         <SmoothScroll>
           <Navbar />
           <main className="min-h-screen">{children}</main>

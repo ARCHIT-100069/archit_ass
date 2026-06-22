@@ -44,8 +44,16 @@ export default function Footer() {
                         <h4 className="font-semibold mb-6 text-[13px] uppercase tracking-[0.12em]">Contact</h4>
                         <ul className="space-y-4 text-[14px] text-neutral-900/60">
                             <li>New Delhi - 110033</li>
-                            <li>+91 81309 73844</li>
-                            <li>architasst@gmail.com</li>
+                            <li>
+                                <a href="tel:+918130973844" className="hover:text-black transition-colors">
+                                    +91 81309 73844
+                                </a>
+                            </li>
+                            <li>
+                                <a href="mailto:architasst@gmail.com" className="hover:text-black transition-colors">
+                                    architasst@gmail.com
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
@@ -60,16 +68,20 @@ export default function Footer() {
                                 Start an Enquiry
                                 <MoveRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </Link>
+                            <Link
+                                href="/request-quote"
+                                className="group flex items-center justify-between border-b border-neutral-300 pb-2 text-sm font-medium text-neutral-600 hover:text-black hover:border-black transition-colors"
+                            >
+                                Request a Quote
+                                <MoveRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </Link>
                         </div>
                     </div>
                 </div>
 
                 <div className="mt-20 border-t border-neutral-200 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-neutral-500">
                     <p>&copy; {currentYear} Archit Associates. All rights reserved.</p>
-                    <div className="flex space-x-6 mt-4 md:mt-0">
-                        <Link href="#" className="hover:text-black transition-colors">Privacy Policy</Link>
-                        <Link href="#" className="hover:text-black transition-colors">Terms of Service</Link>
-                    </div>
+                    <p className="mt-4 md:mt-0 text-neutral-400">New Delhi, India</p>
                 </div>
             </div>
         </footer>

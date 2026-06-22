@@ -92,6 +92,8 @@ export default function ContactPage() {
                                 style={{ border: 0 }}
                                 allowFullScreen={true}
                                 loading="lazy"
+                                title="Archit Associates office location"
+                                referrerPolicy="no-referrer-when-downgrade"
                             />
                         </div>
                     </div>

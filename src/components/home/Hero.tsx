@@ -5,17 +5,18 @@ import Image from "next/image";
 
 export default function Hero() {
     return (
-        <section className="relative h-screen w-full overflow-hidden">
+        <section className="relative h-screen w-full overflow-hidden" aria-label="Archit Associates hero banner">
 
-            {/* Background Video — lowest layer */}
+            {/* Background Video — lowest layer (decorative, aria-hidden) */}
             <video
                 autoPlay
                 muted
                 loop
                 playsInline
-                preload="auto"
+                preload="metadata"
                 poster="https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg"
                 className="absolute inset-0 w-full h-full object-cover z-0"
+                aria-hidden="true"
             >
                 <source src="/hero-video.mp4" type="video/mp4" />
             </video>

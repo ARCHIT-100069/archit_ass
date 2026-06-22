@@ -16,6 +16,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // www → non-www (permanent 301 redirect)
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.architassociates.com" }],
+        destination: "https://architassociates.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
