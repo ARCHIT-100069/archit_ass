@@ -4,24 +4,24 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function Preloader() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
  useEffect(() => {
   const hasLoaded = sessionStorage.getItem("siteLoaded");
 
-  if (hasLoaded) {
-    setVisible(false);
-    return;
+  if (!hasLoaded) {
+    setVisible(true);
+
+    sessionStorage.setItem("siteLoaded", "true");
+
+    const timer = setTimeout(() => {
+      setVisible(false);
+    }, 2200);
+
+    return () => clearTimeout(timer);
   }
-
-  sessionStorage.setItem("siteLoaded", "true");
-
-  const timer = setTimeout(() => {
-    setVisible(false);
-  }, 2200);
-
-  return () => clearTimeout(timer);
 }, []);
+  if (!visible) return null;
 
   return (
     <>
