@@ -78,7 +78,7 @@ export const metadata: Metadata = {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/layout/SmoothScroll";
-import LoadingScreen from "@/components/layout/LoadingScreen";
+import Preloader from "@/components/layout/Preloader";
 
 export default function RootLayout({
   children,
@@ -107,8 +107,8 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${playfair.variable} ${inter.className} overflow-x-hidden relative w-full`}>
-        <LoadingScreen />
-        <SmoothScroll>
+  <Preloader />
+  <SmoothScroll>
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Footer />
