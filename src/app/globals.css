@@ -18,9 +18,13 @@
   --color-muted: var(--muted);
   --font-heading: var(--font-heading), 'Playfair Display', Georgia, 'Times New Roman', serif;
 }
+html,
+body {
+  background: #0a0a0a;
+}
 
 body {
-  background: var(--background);
+  background: #0a0a0a;
   color: var(--foreground);
   font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
   font-size: 15px;
