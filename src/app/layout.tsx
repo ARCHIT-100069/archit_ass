@@ -79,7 +79,6 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 import Preloader from "@/components/layout/Preloader";
-import ScrollPositionManager from "@/components/layout/ScrollPositionManager";
 
 
 export default function RootLayout({
@@ -109,7 +108,6 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${playfair.variable} ${inter.className} overflow-x-hidden relative w-full`}>
-        <ScrollPositionManager />
   <Preloader />
   <SmoothScroll>
           <Navbar />
