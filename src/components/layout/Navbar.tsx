@@ -53,11 +53,9 @@ export default function Navbar() {
                     <Link
                         href="/"
                         className="relative flex items-center gap-2.5 z-[80] group cursor-pointer max-w-[75%]"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            if (isOpen) setIsOpen(false);
-                            window.location.href = "/";
-                        }}
+                       onClick={() => {
+    if (isOpen) setIsOpen(false);
+}}
                     >
                         <div className="relative flex items-center h-[34px] md:h-[40px]">
                             <Image
@@ -82,12 +80,7 @@ export default function Navbar() {
                                 key={link.name}
                                 href={link.href}
                                 className="relative group min-h-[48px] flex items-center"
-                                onClick={(e) => {
-                                    if (link.href === "/") {
-                                        e.preventDefault();
-                                        window.location.href = "/";
-                                    }
-                                }}
+                               onClick={() => {}}
                             >
                                 <span
                                     className={`text-[15px] font-medium tracking-wide transition-colors duration-200 ${
@@ -141,13 +134,9 @@ export default function Navbar() {
                                         ? "font-semibold text-black"
                                         : "font-light text-gray-600 hover:text-black"
                                 }`}
-                                onClick={(e) => {
-                                    setIsOpen(false);
-                                    if (link.href === "/") {
-                                        e.preventDefault();
-                                        window.location.href = "/";
-                                    }
-                                }}
+                                onClick={() => {
+    setIsOpen(false);
+}}
                             >
                                 <span className={isActive(link.href) ? "border-b-2 border-black pb-1" : ""}>
                                     {link.name}
