@@ -18,9 +18,31 @@ export default async function PrimeCustomers() {
   // Duplicate array for seamless infinite scrolling
   const marqueeCompanies = [...displayCompanies, ...displayCompanies];
 
-  if (displayCompanies.length === 0) {
-    return null; // or a loading/empty state
-  }
+ if (error) {
+  return (
+    <div style={{
+      background: "red",
+      color: "white",
+      padding: "20px",
+      textAlign: "center"
+    }}>
+      Supabase Error: {error.message}
+    </div>
+  );
+}
+
+if (displayCompanies.length === 0) {
+  return (
+    <div style={{
+      background: "orange",
+      color: "black",
+      padding: "20px",
+      textAlign: "center"
+    }}>
+      No companies found in prime_customers table
+    </div>
+  );
+}
 
   // Card width (w-64 = 256px) + gap (gap-6 = 24px)
   const cardStep = 256 + 24;
