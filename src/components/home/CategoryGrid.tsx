@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { productCatalog } from "@/data/productCatalog";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function CategoryGrid() {
     const gridRef = useRef<HTMLDivElement>(null);
@@ -16,48 +17,22 @@ export default function CategoryGrid() {
             grid.querySelectorAll<HTMLElement>(".solution-card")
         );
 
-        // Keep track of all pending stagger timeouts so we can cancel them on leave
-        let timeoutIds: ReturnType<typeof setTimeout>[] = [];
+        // Keep track of all pending stagger timeouts so we can cancel them on unmount
+        const timeoutIds: ReturnType<typeof setTimeout>[] = [];
 
-        const resetCards = () => {
-            // Cancel any in-progress stagger
-            timeoutIds.forEach(clearTimeout);
-            timeoutIds = [];
-
-            // Instantly snap cards back to hidden (no transition during reset)
-            cards.forEach((card) => {
-                card.classList.remove("solution-card--visible");
-                card.classList.add("solution-card--resetting");
-            });
-
-            // Re-enable transitions after the reset frame has painted
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    cards.forEach((card) => {
-                        card.classList.remove("solution-card--resetting");
-                    });
-                });
-            });
-        };
-
-        const animateCards = () => {
-            cards.forEach((card, i) => {
-                const id = setTimeout(() => {
-                    card.classList.add("solution-card--visible");
-                }, i * 130); // ~130ms stagger
-                timeoutIds.push(id);
-            });
-        };
-
+        // Reveal once and stay revealed — avoids cards getting stuck mid-fade
+        // if the user scrolls back and forth across the section boundary.
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        // Section entered viewport → stagger animate in
-                        animateCards();
-                    } else {
-                        // Section left viewport → reset for next scroll
-                        resetCards();
+                        cards.forEach((card, i) => {
+                            const id = setTimeout(() => {
+                                card.classList.add("solution-card--visible");
+                            }, i * 130); // ~130ms stagger
+                            timeoutIds.push(id);
+                        });
+                        observer.disconnect();
                     }
                 });
             },
@@ -93,11 +68,6 @@ export default function CategoryGrid() {
                 .solution-card--visible {
                     opacity: 1;
                     transform: translateY(0);
-                }
-
-                /* During reset: suppress transitions so cards snap back instantly */
-                .solution-card--resetting {
-                    transition: none !important;
                 }
 
                 /* Preserve hover lift after reveal */
@@ -147,6 +117,14 @@ export default function CategoryGrid() {
                                     <p className="text-neutral-900/55 text-[15px] leading-[1.7]">
                                         {category.description}
                                     </p>
+
+                                    {/* Category preview image — first product image of the category */}
+                                    {(() => {
+                                        const previewImg = category.subcategories?.[0]?.products?.[0]?.image;
+                                        return previewImg ? (
+                                            <CategoryPreviewImage src={previewImg} alt={category.title} />
+                                        ) : null;
+                                    })()}
                                 </div>
                             </Link>
                         ))}
@@ -154,5 +132,26 @@ export default function CategoryGrid() {
                 </div>
             </section>
         </>
+    );
+}
+
+/* ── Category preview image with graceful error fallback ── */
+function CategoryPreviewImage({ src, alt }: { src: string; alt: string }) {
+    const [imgSrc, setImgSrc] = useState<string | null>(src);
+    if (!imgSrc) return null;
+    return (
+        <div className="relative w-full h-36 mt-5 rounded-lg overflow-hidden border border-neutral-100" style={{ backgroundColor: "#f5f5f5" }}>
+            <Image
+                src={imgSrc}
+                alt={alt}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                quality={80}
+                loading="lazy"
+                placeholder="empty"
+                className="object-contain p-3"
+                onError={() => setImgSrc(null)}
+            />
+        </div>
     );
 }

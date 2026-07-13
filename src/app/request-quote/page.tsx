@@ -5,9 +5,12 @@ import { Suspense } from "react";
 import EnquiryFormClient from "@/components/enquiry/EnquiryFormClient";
 
 export const metadata: Metadata = {
-    title: "Request a Quote | Archit Associates",
+    title: "Request a Quote",
     description:
         "Submit a Request for Quotation (RFQ) for industrial spares, testing equipment, safety gear, and more from Archit Associates.",
+    alternates: {
+        canonical: "/request-quote",
+    },
 };
 
 export default function EnquiryPage() {

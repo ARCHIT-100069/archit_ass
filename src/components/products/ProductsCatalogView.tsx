@@ -13,6 +13,7 @@ interface Product {
     image_url: string | null;
     subcategory: string | null;
     order_index: number;
+    categoryName?: string;
 }
 
 interface Category {
@@ -75,9 +76,16 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
             {/* Product Info */}
             <div className="p-4 flex flex-col flex-grow justify-between">
-                <h4 className="text-[14px] md:text-[12px] font-normal uppercase tracking-[0.06em] text-black leading-tight mb-2">
-                    {product.name}
-                </h4>
+                <div>
+                    {product.categoryName && (
+                        <div className="text-[10px] text-neutral-400 uppercase tracking-widest mb-1">
+                            {product.categoryName}
+                        </div>
+                    )}
+                    <h4 className="text-[14px] md:text-[12px] font-normal uppercase tracking-[0.06em] text-black leading-tight mb-2">
+                        {product.name}
+                    </h4>
+                </div>
                 <div className="text-[12px] md:text-[11px] text-neutral-400 uppercase tracking-widest mt-auto">
                     Request Quote
                 </div>
@@ -94,6 +102,7 @@ export default function ProductsCatalogView() {
     const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
     const [activeFilter, setActiveFilter] = useState("ALL");
     const [currentPage, setCurrentPage] = useState(1);
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         async function loadData() {
@@ -130,12 +139,27 @@ export default function ProductsCatalogView() {
         setSelectedCategoryId(id);
         setActiveFilter("ALL");
         setCurrentPage(1);
+        setSearchQuery("");
     };
 
     const selectedCategory = categories.find(c => c.id === selectedCategoryId);
 
-    // Get all products to show based on the active filter
+    const trimmedQuery = searchQuery.trim().toLowerCase();
+    const isSearching = trimmedQuery.length > 0;
+
+    // Cross-category search results — searches product names across every category
+    const searchResults = useMemo(() => {
+        if (!isSearching) return [];
+        return categories.flatMap(category =>
+            (category.products || [])
+                .filter(p => p.name.toLowerCase().includes(trimmedQuery))
+                .map(p => ({ ...p, categoryName: category.name }))
+        );
+    }, [categories, trimmedQuery, isSearching]);
+
+    // Get all products to show based on the active filter (ignored while searching)
     const displayedProducts = useMemo(() => {
+        if (isSearching) return searchResults;
         if (!selectedCategory) return [];
         const prods = selectedCategory.products || [];
         if (activeFilter === "ALL") {
@@ -143,7 +167,12 @@ export default function ProductsCatalogView() {
         } else {
             return prods.filter(p => p.subcategory === activeFilter);
         }
-    }, [selectedCategory, activeFilter]);
+    }, [selectedCategory, activeFilter, isSearching, searchResults]);
+
+    // Reset to page 1 whenever the search query changes
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [trimmedQuery]);
 
     if (isLoading) {
         return (
@@ -239,18 +268,48 @@ export default function ProductsCatalogView() {
                 
                 {/* Filter Row Header */}
                 <div className="bg-white border-b border-neutral-200/60 transition-all">
+                    {/* Search across all categories */}
+                    <div className="px-6 md:px-10 pt-8">
+                        <div className="relative max-w-md">
+                            <svg className="absolute left-0 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            <input
+                                type="text"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                placeholder="Search all products…"
+                                aria-label="Search all products"
+                                className="w-full h-10 pl-6 pr-8 border-b border-neutral-300 bg-transparent text-[13px] text-black placeholder:text-neutral-400 focus:outline-none focus:border-black transition-colors"
+                            />
+                            {isSearching && (
+                                <button
+                                    onClick={() => setSearchQuery("")}
+                                    aria-label="Clear search"
+                                    className="absolute right-0 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-black transition-colors"
+                                >
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            )}
+                        </div>
+                    </div>
+
                     {/* Header info */}
-                    <div className="px-6 md:px-10 pt-8 pb-4">
+                    <div className="px-6 md:px-10 pt-6 pb-4">
                         <h1 className="text-[14px] font-medium uppercase tracking-[0.06em] text-black mb-2">
-                            {selectedCategory.name}
+                            {isSearching ? `Search Results` : selectedCategory.name}
                         </h1>
                         <p className="text-[12px] text-neutral-500 tracking-wide max-w-2xl lowercase first-letter:uppercase">
-                            {selectedCategory.description}
+                            {isSearching
+                                ? `${searchResults.length} product${searchResults.length === 1 ? "" : "s"} matching "${searchQuery.trim()}"`
+                                : selectedCategory.description}
                         </p>
                     </div>
 
                     {/* Subcategory Filters */}
-                    {!isFlat && (
+                    {!isFlat && !isSearching && (
                         <div className="px-6 md:px-10 pb-6 flex overflow-x-auto scrollbar-hide gap-2 pt-4">
                             <button
                                 onClick={() => { setActiveFilter("ALL"); setCurrentPage(1); }}

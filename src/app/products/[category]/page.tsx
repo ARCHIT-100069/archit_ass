@@ -10,8 +10,11 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
     const { category: categoryId } = await params;
     const category = productCatalog.find((c) => c.id === categoryId);
     return {
-        title: category ? `${category.title} | Archit Associates` : "Products | Archit Associates",
+        title: category ? category.title : "Products",
         description: category ? category.description : "View our industrial product range.",
+        alternates: {
+            canonical: `/products/${categoryId}`,
+        },
     };
 }
 

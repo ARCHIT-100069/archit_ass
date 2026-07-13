@@ -4,9 +4,12 @@ import { Metadata } from "next";
 import ProductsCatalogView from "@/components/products/ProductsCatalogView";
 
 export const metadata: Metadata = {
-    title: "All Products | Archit Associates",
+    title: "All Products",
     description:
         "Browse our complete range of industrial manufacturing solutions — railway inspection gauges, pre-casting equipment, lab testing instruments, safety gear, and more.",
+    alternates: {
+        canonical: "/products",
+    },
 };
 
 export default function ProductsPage() {

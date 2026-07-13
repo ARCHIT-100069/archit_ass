@@ -7,6 +7,7 @@ import SubCategorySection from "./SubCategorySection";
 
 interface ProductItem {
     name: string;
+    image?: string;
 }
 
 interface SubCategory {

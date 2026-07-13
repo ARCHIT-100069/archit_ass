@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -21,6 +20,22 @@ export default function Navbar() {
         handleScroll();
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    // Lock body scroll while the mobile menu is open
+    useEffect(() => {
+        if (isOpen) {
+            const previousOverflow = document.body.style.overflow;
+            document.body.style.overflow = "hidden";
+            return () => {
+                document.body.style.overflow = previousOverflow;
+            };
+        }
+    }, [isOpen]);
+
+    // Close the mobile menu on route change
+    useEffect(() => {
+        setIsOpen(false);
+    }, [pathname]);
 
     const navLinks = [
         { name: "Home", href: "/" },
@@ -116,36 +131,36 @@ export default function Navbar() {
                 </div>
             </nav>
 
-            {/* Mobile Menu Overlay - rendered outside nav to avoid backdrop-filter issues */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="fixed inset-0 bg-white z-[65] flex flex-col items-center justify-center space-y-4 px-4 w-full h-[100dvh]"
-                    >
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className={`text-2xl tracking-wide transition-colors w-full text-center py-4 min-h-[48px] flex items-center justify-center ${
-                                    isActive(link.href)
-                                        ? "font-semibold text-black"
-                                        : "font-light text-gray-600 hover:text-black"
-                                }`}
-                                onClick={() => {
+            {/* Mobile Menu Overlay - rendered outside nav to avoid backdrop-filter issues.
+                Always mounted, visibility toggled via CSS transition (no JS animation
+                loop) so the panel can never get stuck partway through a fade with
+                content bleeding through behind it. */}
+            <div
+                aria-hidden={!isOpen}
+                className={`fixed inset-0 bg-white z-[65] flex flex-col items-center justify-center space-y-4 px-4 w-full h-[100dvh] transition-opacity duration-200 ease-out ${
+                    isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+                }`}
+            >
+                {navLinks.map((link) => (
+                    <Link
+                        key={link.name}
+                        href={link.href}
+                        tabIndex={isOpen ? 0 : -1}
+                        className={`text-2xl tracking-wide transition-colors w-full text-center py-4 min-h-[48px] flex items-center justify-center ${
+                            isActive(link.href)
+                                ? "font-semibold text-black"
+                                : "font-light text-gray-600 hover:text-black"
+                        }`}
+                        onClick={() => {
     setIsOpen(false);
 }}
-                            >
-                                <span className={isActive(link.href) ? "border-b-2 border-black pb-1" : ""}>
-                                    {link.name}
-                                </span>
-                            </Link>
-                        ))}
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                    >
+                        <span className={isActive(link.href) ? "border-b-2 border-black pb-1" : ""}>
+                            {link.name}
+                        </span>
+                    </Link>
+                ))}
+            </div>
         </>
     );
 }

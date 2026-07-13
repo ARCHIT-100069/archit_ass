@@ -3,9 +3,12 @@ import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "About Us | Archit Associates",
+    title: "About Us",
     description:
         "Learn about Archit Associates — a New Delhi-based supplier of premium industrial spares, laboratory testing equipment, and precision instruments. Established in 2018, backed by 28+ years of industry experience, serving infrastructure and manufacturing companies across India.",
+    alternates: {
+        canonical: "/about",
+    },
 };
 
 

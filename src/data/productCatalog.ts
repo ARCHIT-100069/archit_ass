@@ -49,15 +49,15 @@ export const productCatalog: ProductCategory[] = [
             {
                 title: "Mould & Formwork Systems",
                 products: [
-                    { name: "PSC Sleeper Moulds (BG/MG)" },
-                    { name: "Modular Precast Moulds" },
-                    { name: "High-Frequency Vibrators" },
+                    { name: "PSC Sleeper Moulds (BG/MG)", image: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/product-images/PSC%20Sleeper%20Mould.png" },
+                    { name: "Modular Precast Moulds", image: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/product-images/Modular%20Precast%20Mould.png" },
+                    { name: "High-Frequency Vibrators", image: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/product-images/High%20Frequency%20Vibrator.png" },
                 ],
             },
             {
                 title: "Stressing & Tensioning Systems",
                 products: [
-                    { name: "Hydraulic Jacking Units (500–1000 KN)" },
+                    { name: "Hydraulic Jacking Units (500–1000 KN)", image: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/product-images/Hyadaulic%20Jacking%20uNIT.jpeg" },
                 ],
             },
         ],
@@ -201,13 +201,13 @@ export const productCatalog: ProductCategory[] = [
             {
                 title: "Laboratory Testing Instruments & Accessories",
                 products: [
-                    { name: "Lime Testing Machine" },
-                    { name: "Reflectance Meter for Brightness and Whiteness" },
-                    { name: "Test Sieves" },
-                    { name: "Weighing Balances" },
-                    { name: "Laboratory Spares" },
-                    { name: "Lab Chemicals" },
-                    { name: "Glassware / Plastic Labware" },
+                    { name: "Lime Testing Machine", image: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/product-images/Lime%20Testing%20Machine.jpeg" },
+                    { name: "Reflectance Meter for Brightness and Whiteness", image: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/product-images/Reflectance%20Meter%20for%20Brightness%20and%20Whiteness.jpeg" },
+                    { name: "Test Sieves", image: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/product-images/Test%20Sieves.jpeg" },
+                    { name: "Weighing Balances", image: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/product-images/Weighing%20Balances.jpeg" },
+                    { name: "Laboratory Spares", image: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/product-images/LABORATORY%20SPARES.jpeg" },
+                    { name: "Lab Chemicals", image: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/product-images/lab%20chemicals.jpeg" },
+                    { name: "Glassware / Plastic Labware", image: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/product-images/Glassware%20%3A%20Plastic%20Labware.jpeg" },
                 ],
             },
         ],

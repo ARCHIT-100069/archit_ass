@@ -4,9 +4,12 @@ import { Metadata } from "next";
 import ContactFormClient from "@/components/contact/ContactFormClient";
 
 export const metadata: Metadata = {
-    title: "Contact Us | Archit Associates",
+    title: "Contact Us",
     description:
         "Get in touch with Archit Associates for general inquiries about industrial machinery, spares, and equipment.",
+    alternates: {
+        canonical: "/contact",
+    },
 };
 
 export default function ContactPage() {

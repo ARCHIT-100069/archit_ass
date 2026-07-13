@@ -54,6 +54,16 @@ export default function Footer() {
                                     architasst@gmail.com
                                 </a>
                             </li>
+                            <li>
+                                <a
+                                    href="https://wa.me/918130973844?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20your%20products."
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-black transition-colors"
+                                >
+                                    Chat on WhatsApp
+                                </a>
+                            </li>
                         </ul>
                     </div>
 
