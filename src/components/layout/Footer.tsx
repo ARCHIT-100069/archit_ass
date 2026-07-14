@@ -34,7 +34,9 @@ export default function Footer() {
                         <ul className="space-y-4 text-[14px] text-neutral-900/60">
                             <li><Link href="/" className="hover:text-black transition-colors">Home</Link></li>
                             <li><Link href="/products" className="hover:text-black transition-colors">Products</Link></li>
+                            <li><Link href="/industries" className="hover:text-black transition-colors">Industries We Serve</Link></li>
                             <li><Link href="/about" className="hover:text-black transition-colors">About Us</Link></li>
+                            <li><Link href="/faq" className="hover:text-black transition-colors">FAQ</Link></li>
                             <li><Link href="/contact" className="hover:text-black transition-colors">Contact</Link></li>
                         </ul>
                     </div>
@@ -85,6 +87,14 @@ export default function Footer() {
                                 Request a Quote
                                 <MoveRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </Link>
+                            <a
+                                href="/archit-associates-product-catalogue.pdf"
+                                download
+                                className="group flex items-center justify-between border-b border-neutral-300 pb-2 text-sm font-medium text-neutral-600 hover:text-black hover:border-black transition-colors"
+                            >
+                                Download Catalogue (PDF)
+                                <MoveRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                            </a>
                         </div>
                     </div>
                 </div>

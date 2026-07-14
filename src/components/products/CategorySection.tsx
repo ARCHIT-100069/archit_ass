@@ -20,6 +20,7 @@ interface CategorySectionProps {
     title: string;
     subcategories: SubCategory[];
     defaultOpen?: boolean;
+    categoryId?: string;
 }
 
 export default function CategorySection({
@@ -27,6 +28,7 @@ export default function CategorySection({
     title,
     subcategories,
     defaultOpen = false,
+    categoryId,
 }: CategorySectionProps) {
     const [isOpen, setIsOpen] = useState(defaultOpen);
 
@@ -93,6 +95,7 @@ export default function CategorySection({
                                     title={sub.title}
                                     products={sub.products}
                                     isFlat={isFlat}
+                                    categoryId={categoryId}
                                 />
                             ))}
                         </div>

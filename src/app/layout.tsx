@@ -86,6 +86,41 @@ import SmoothScroll from "@/components/layout/SmoothScroll";
 import Preloader from "@/components/layout/Preloader";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 
+// Structured data so search engines show Archit Associates as a business
+// with contact details, hours, and service area.
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${BASE_URL}/#organization`,
+  name: "Archit Associates",
+  url: BASE_URL,
+  logo: "https://kezzhxqzybukpgkijbnz.supabase.co/storage/v1/object/public/customer-logos/ARCHIT_ASS_LOGO.jpg",
+  description:
+    "New Delhi-based supplier of industrial spares, laboratory testing equipment, precision instruments, railway inspection gauges, and industrial safety gear.",
+  email: "architasst@gmail.com",
+  telephone: "+91-81309-73844",
+  foundingDate: "2018",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "New Delhi",
+    postalCode: "110033",
+    addressCountry: "IN",
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "India",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "09:00",
+      closes: "18:00",
+    },
+  ],
+  sameAs: [],
+};
+
 
 export default function RootLayout({
   children,
@@ -111,6 +146,10 @@ export default function RootLayout({
               window.scrollTo(0, 0);
             `,
           }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>
       <body className={`${inter.variable} ${playfair.variable} ${inter.className} overflow-x-hidden relative w-full`}>

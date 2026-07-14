@@ -51,6 +51,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
                     title={category.title}
                     subcategories={category.subcategories}
                     defaultOpen={true}
+                    categoryId={category.id}
                 />
             </div>
         </div>

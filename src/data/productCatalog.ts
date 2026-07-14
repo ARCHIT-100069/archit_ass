@@ -16,6 +16,49 @@ export interface ProductCategory {
     subcategories: SubCategory[];
 }
 
+/** URL-safe slug for a product name, e.g. "PSC Sleeper Moulds (BG/MG)" → "psc-sleeper-moulds-bg-mg" */
+export function slugifyProduct(name: string): string {
+    return name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+}
+
+export interface ProductLookupResult {
+    product: ProductItem;
+    productSlug: string;
+    subcategoryTitle: string;
+    category: ProductCategory;
+}
+
+/** Find a product by its category id and product slug. */
+export function findProductBySlug(categoryId: string, productSlug: string): ProductLookupResult | null {
+    const category = productCatalog.find((c) => c.id === categoryId);
+    if (!category) return null;
+    for (const sub of category.subcategories) {
+        for (const product of sub.products) {
+            if (slugifyProduct(product.name) === productSlug) {
+                return { product, productSlug, subcategoryTitle: sub.title, category };
+            }
+        }
+    }
+    return null;
+}
+
+/** All products across every category, with slugs and category context. */
+export function getAllProducts(): ProductLookupResult[] {
+    return productCatalog.flatMap((category) =>
+        category.subcategories.flatMap((sub) =>
+            sub.products.map((product) => ({
+                product,
+                productSlug: slugifyProduct(product.name),
+                subcategoryTitle: sub.title,
+                category,
+            }))
+        )
+    );
+}
+
 export const productCatalog: ProductCategory[] = [
     {
         id: "railway-sleeper-inspection",

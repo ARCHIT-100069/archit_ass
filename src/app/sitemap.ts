@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { productCatalog } from "@/data/productCatalog";
+import { productCatalog, getAllProducts } from "@/data/productCatalog";
 
 const BASE_URL = "https://architassociates.com";
 
@@ -35,6 +35,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: "monthly",
             priority: 0.7,
         },
+        {
+            url: `${BASE_URL}/industries`,
+            lastModified: new Date(),
+            changeFrequency: "monthly",
+            priority: 0.7,
+        },
+        {
+            url: `${BASE_URL}/faq`,
+            lastModified: new Date(),
+            changeFrequency: "monthly",
+            priority: 0.6,
+        },
     ];
 
     const categoryRoutes: MetadataRoute.Sitemap = productCatalog.map((category) => ({
@@ -44,5 +56,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8,
     }));
 
-    return [...staticRoutes, ...categoryRoutes];
+    const productRoutes: MetadataRoute.Sitemap = getAllProducts().map(({ category, productSlug }) => ({
+        url: `${BASE_URL}/products/${category.id}/${productSlug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+    }));
+
+    return [...staticRoutes, ...categoryRoutes, ...productRoutes];
 }

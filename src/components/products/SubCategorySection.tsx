@@ -5,6 +5,7 @@ import { Package, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { slugifyProduct } from "@/data/productCatalog";
 
 interface ProductItem {
     name: string;
@@ -15,9 +16,10 @@ interface SubCategorySectionProps {
     title: string;
     products: ProductItem[];
     isFlat?: boolean; // If true, skip subcategory heading (for categories 4-7 with generic "Products" title)
+    categoryId?: string; // When set, cards link to the product detail page
 }
 
-function ProductCardMini({ product, index }: { product: ProductItem; index: number }) {
+function ProductCardMini({ product, index, categoryId }: { product: ProductItem; index: number; categoryId?: string }) {
     const [imgSrc, setImgSrc] = useState(product.image ?? null);
     const router = useRouter();
 
@@ -25,6 +27,16 @@ function ProductCardMini({ product, index }: { product: ProductItem; index: numb
         e.preventDefault();
         e.stopPropagation();
         router.push(`/request-quote?product=${encodeURIComponent(product.name)}`);
+    };
+
+    // Card click opens the product detail page when we know the category,
+    // otherwise falls back to the quote form.
+    const handleCardClick = () => {
+        if (categoryId) {
+            router.push(`/products/${categoryId}/${slugifyProduct(product.name)}`);
+        } else {
+            router.push(`/request-quote?product=${encodeURIComponent(product.name)}`);
+        }
     };
 
     return (
@@ -35,7 +47,7 @@ function ProductCardMini({ product, index }: { product: ProductItem; index: numb
             transition={{ duration: 0.3, delay: index * 0.04 }}
             viewport={{ once: true }}
             className="group relative bg-neutral-50 border border-neutral-100 hover:border-neutral-300 hover:bg-white rounded-lg p-6 transition-all duration-300 hover:shadow-md cursor-pointer flex flex-col"
-            onClick={handleQuotation}
+            onClick={handleCardClick}
         >
             {/* Thumbnail — shown only when image is available */}
             {imgSrc && (
@@ -80,7 +92,7 @@ function ProductCardMini({ product, index }: { product: ProductItem; index: numb
     );
 }
 
-export default function SubCategorySection({ title, products, isFlat = false }: SubCategorySectionProps) {
+export default function SubCategorySection({ title, products, isFlat = false, categoryId }: SubCategorySectionProps) {
     return (
         <div className={isFlat ? "" : "mb-8"}>
             {/* Subcategory heading — hidden for flat categories */}
@@ -97,7 +109,7 @@ export default function SubCategorySection({ title, products, isFlat = false }: 
             {/* Product items grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {products.map((product, index) => (
-                    <ProductCardMini key={product.name} product={product} index={index} />
+                    <ProductCardMini key={product.name} product={product} index={index} categoryId={categoryId} />
                 ))}
             </div>
         </div>
