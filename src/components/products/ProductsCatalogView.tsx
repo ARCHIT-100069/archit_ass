@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 // --- Types ---
-interface Product {
+export interface Product {
     id: string;
     category_id: string;
     name: string;
@@ -16,7 +16,7 @@ interface Product {
     categoryName?: string;
 }
 
-interface Category {
+export interface Category {
     id: string;
     number: number;
     name: string;
@@ -96,15 +96,18 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
 // --- Main Component ---
 
-export default function ProductsCatalogView() {
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [selectedCategoryId, setSelectedCategoryId] = useState<string>('');
+export default function ProductsCatalogView({ initialCategories = [] }: { initialCategories?: Category[] }) {
+    const [categories, setCategories] = useState<Category[]>(initialCategories);
+    const [isLoading, setIsLoading] = useState(initialCategories.length === 0);
+    const [selectedCategoryId, setSelectedCategoryId] = useState<string>(initialCategories[0]?.id ?? '');
     const [activeFilter, setActiveFilter] = useState("ALL");
     const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
+        // Data already server-rendered — no client fetch needed (keeps products visible to search engines)
+        if (initialCategories.length > 0) return;
+
         async function loadData() {
             try {
                 const { data, error } = await supabase
@@ -132,6 +135,7 @@ export default function ProductsCatalogView() {
             }
         }
         loadData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Reset filters and pagination when category changes
