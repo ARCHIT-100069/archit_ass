@@ -102,7 +102,9 @@ const organizationJsonLd = {
   foundingDate: "2018",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "A-242, Jahangir Puri, Near Kali Mandir, Bhalswa Jahangirpuri",
     addressLocality: "New Delhi",
+    addressRegion: "Delhi",
     postalCode: "110033",
     addressCountry: "IN",
   },
@@ -118,7 +120,9 @@ const organizationJsonLd = {
       closes: "18:00",
     },
   ],
-  sameAs: [],
+  sameAs: [
+    "https://www.indiamart.com/architassociates/",
+  ],
 };
 
 

@@ -34,7 +34,6 @@ export default function Footer() {
                         <ul className="space-y-4 text-[14px] text-neutral-900/60">
                             <li><Link href="/" className="hover:text-black transition-colors">Home</Link></li>
                             <li><Link href="/products" className="hover:text-black transition-colors">Products</Link></li>
-                            <li><Link href="/best-lab-equipment-india" className="hover:text-black transition-colors">Lab Equipment Buying Guide</Link></li>
                             <li><Link href="/industries" className="hover:text-black transition-colors">Industries We Serve</Link></li>
                             <li><Link href="/about" className="hover:text-black transition-colors">About Us</Link></li>
                             <li><Link href="/faq" className="hover:text-black transition-colors">FAQ</Link></li>
@@ -46,7 +45,7 @@ export default function Footer() {
                     <div>
                         <h4 className="font-semibold mb-6 text-[13px] uppercase tracking-[0.12em]">Contact</h4>
                         <ul className="space-y-4 text-[14px] text-neutral-900/60">
-                            <li>New Delhi - 110033</li>
+                            <li>A-242, Jahangir Puri, Near Kali Mandir, New Delhi - 110033</li>
                             <li>
                                 <a href="tel:+918130973844" className="hover:text-black transition-colors">
                                     +91 81309 73844
