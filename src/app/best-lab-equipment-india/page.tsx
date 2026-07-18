@@ -80,8 +80,8 @@ const equipmentSections = [
     {
         title: "Railway & Precision Inspection Gauges",
         body: "A specialised category where Archit Associates is particularly strong: toe gap gauges, digital master gauges, sleeper checking gauges, RT3705 inspection gauges, and RT381 insert checking gauges for PSC sleeper manufacturers and railway contractors.",
-        href: "/products/railway-sleeper-inspection",
-        linkText: "Railway Inspection Gauges",
+        href: "/toe-gap-gauge",
+        linkText: "Railway Toe Gap Gauges & Inspection Gauges",
     },
     {
         title: "Surveying & Field Monitoring Instruments",
