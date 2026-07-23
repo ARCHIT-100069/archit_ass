@@ -55,9 +55,9 @@ const faqs = [
 const equipmentSections = [
     {
         title: "Concrete & Cement Testing Equipment",
-        body: "The backbone of every civil lab. Compression testing machines (manual, semi-automatic, and fully automatic), cube and cylinder moulds, Vicat apparatus for setting time, Le Chatelier apparatus for soundness, flow tables, and curing tanks. For site work, slump cones and rebound hammers handle quick quality checks. Look for load frames calibrated against IS 516 requirements.",
-        href: "/products/civil-material-testing",
-        linkText: "Civil Material Testing Equipment",
+        body: "The backbone of every civil lab. Compression testing machines (manual, semi-automatic, and fully automatic), cube and cylinder moulds, Vicat apparatus for setting time, Le Chatelier apparatus for soundness, flow tables, and curing tanks. For site work, slump cones and rebound hammers handle quick quality checks. Look for load frames calibrated against IS 516 requirements — our compression testing machine buying guide walks through capacity, automation level, and compliance in detail.",
+        href: "/compression-testing-machine-buying-guide",
+        linkText: "How to Choose a Compression Testing Machine",
     },
     {
         title: "Soil, Geotechnical & Road Testing Equipment",
