@@ -10,8 +10,10 @@ export async function generateMetadata({ params }: { params: Promise<{ category:
     const { category: categoryId } = await params;
     const category = productCatalog.find((c) => c.id === categoryId);
     return {
-        title: category ? category.title : "Products",
-        description: category ? category.description : "View our industrial product range.",
+        title: category ? `${category.title} — Supplier in India` : "Products",
+        description: category
+            ? `${category.description} Supplied by Archit Associates, New Delhi — request a quotation for delivery across India.`
+            : "View our industrial product range.",
         alternates: {
             canonical: `/products/${categoryId}`,
         },

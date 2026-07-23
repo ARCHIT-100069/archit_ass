@@ -3,9 +3,9 @@ import ProductsCatalogView, { Category } from "@/components/products/ProductsCat
 import { supabase } from "@/lib/supabase";
 
 export const metadata: Metadata = {
-    title: "All Products",
+    title: "All Products — Laboratory Testing Equipment & Industrial Supplies",
     description:
-        "Browse our complete range of industrial manufacturing solutions — railway inspection gauges, pre-casting equipment, lab testing instruments, safety gear, and more.",
+        "Browse the complete Archit Associates range — railway inspection gauges, civil material and laboratory testing instruments, pre-casting equipment, safety gear, and more. New Delhi supplier, delivery across India.",
     alternates: {
         canonical: "/products",
     },
