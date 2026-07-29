@@ -61,9 +61,9 @@ const equipmentSections = [
     },
     {
         title: "Soil, Geotechnical & Road Testing Equipment",
-        body: "CBR testing machines, Proctor compaction apparatus, direct shear machines, permeability equipment, sieve shakers with IS sieve sets, and field density kits. Road and bitumen labs add penetrometers, ductility testing machines, Marshall stability apparatus, and softening point equipment per IS 2720 and IS 1203 series.",
-        href: "/products/civil-material-testing",
-        linkText: "Soil & Road Testing Range",
+        body: "CBR testing machines, Proctor compaction apparatus, direct shear machines, permeability equipment, sieve shakers with IS sieve sets, and field density kits. Road and bitumen labs add penetrometers, ductility testing machines, Marshall stability apparatus, and softening point equipment per IS 2720 and IS 1203 series. Our CBR testing machine buying guide covers IS 2720 Part 16 compliance, load frame capacity, and the soaking accessories buyers overlook.",
+        href: "/cbr-testing-machine-buying-guide",
+        linkText: "How to Choose a CBR Testing Machine",
     },
     {
         title: "Chemical, Paint & Coating Testing Instruments",

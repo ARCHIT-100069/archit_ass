@@ -36,6 +36,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
+            url: `${BASE_URL}/cbr-testing-machine-buying-guide`,
+            lastModified: new Date(),
+            changeFrequency: "monthly",
+            priority: 0.9,
+        },
+        {
             url: `${BASE_URL}/slake-lime-testing-equipment`,
             lastModified: new Date(),
             changeFrequency: "monthly",

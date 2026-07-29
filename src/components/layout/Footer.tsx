@@ -37,6 +37,7 @@ export default function Footer() {
                             <li><Link href="/best-lab-equipment-india" className="hover:text-black transition-colors">Lab Equipment Buying Guide</Link></li>
                             <li><Link href="/toe-gap-gauge" className="hover:text-black transition-colors">Railway Toe Gap Gauges</Link></li>
                             <li><Link href="/compression-testing-machine-buying-guide" className="hover:text-black transition-colors">CTM Buying Guide</Link></li>
+                            <li><Link href="/cbr-testing-machine-buying-guide" className="hover:text-black transition-colors">CBR Buying Guide</Link></li>
                             <li><Link href="/industries" className="hover:text-black transition-colors">Industries We Serve</Link></li>
                             <li><Link href="/about" className="hover:text-black transition-colors">About Us</Link></li>
                             <li><Link href="/faq" className="hover:text-black transition-colors">FAQ</Link></li>
