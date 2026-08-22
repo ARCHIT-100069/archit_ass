@@ -200,6 +200,7 @@ function ProductsTab({ products, categories, refresh }: { products: any[]; categ
   const handleEdit = (prod: any) => {
     setForm({ name: prod.name, category_id: prod.category_id, subcategory: prod.subcategory || "", order_index: prod.order_index, id: prod.id });
     setIsEditing(true);
+    setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth" }), 50);
   };
 
   // Group products by category
@@ -210,28 +211,84 @@ function ProductsTab({ products, categories, refresh }: { products: any[]; categ
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">{isEditing ? "Edit Product" : "Add New Product"}</h2>
-      <form onSubmit={handleSubmit} className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input required type="text" placeholder="Product Name" value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="border p-2 rounded" />
-        <select required value={form.category_id} onChange={e => setForm({...form, category_id: e.target.value})} className="border p-2 rounded bg-white">
-          <option value="" disabled>Select Category</option>
-          {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-        </select>
-        <input type="text" placeholder="Subcategory (optional)" value={form.subcategory} onChange={e => setForm({...form, subcategory: e.target.value})} className="border p-2 rounded" />
-        <input type="number" placeholder="Order Index" value={form.order_index} onChange={e => setForm({...form, order_index: e.target.value})} className="border p-2 rounded" />
-        <div className="border p-2 rounded md:col-span-2 flex items-center gap-4">
-          <span className="text-sm text-gray-500">Image:</span>
-          <input type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} />
-          {isEditing && !file && <span className="text-xs text-blue-500">Leave blank to keep existing image</span>}
-        </div>
-        <div className="md:col-span-2 flex gap-2">
-          <button type="submit" disabled={uploading} className="bg-black text-white px-4 py-2 rounded disabled:opacity-50">
-            {uploading ? "Saving..." : isEditing ? "Update Product" : "Add Product"}
-          </button>
-          {isEditing && <button type="button" onClick={() => { setIsEditing(false); setForm({ name: "", category_id: "", subcategory: "", order_index: "", id: "" }); }} className="bg-gray-200 px-4 py-2 rounded">Cancel</button>}
-        </div>
-      </form>
+      {/* ── Image Upload Modal ── */}
+      {imgModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+            <h3 className="text-lg font-bold mb-1">Upload Image</h3>
+            <p className="text-sm text-gray-500 mb-4">{imgModal.name}</p>
 
+            {/* Current image */}
+            {imgModal.current && !imgPreview && (
+              <div className="mb-4 flex flex-col items-center gap-2">
+                <p className="text-xs text-gray-400 uppercase tracking-wider">Current Image</p>
+                <Image src={imgModal.current} alt="" width={160} height={160} className="object-contain rounded border bg-gray-50 p-2" />
+              </div>
+            )}
+
+            {/* Preview of new image */}
+            {imgPreview && (
+              <div className="mb-4 flex flex-col items-center gap-2">
+                <p className="text-xs text-green-600 uppercase tracking-wider font-medium">New Image Preview</p>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={imgPreview} alt="preview" className="max-h-48 object-contain rounded border bg-gray-50 p-2" />
+              </div>
+            )}
+
+            {/* File picker */}
+            <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-black transition-colors bg-gray-50 hover:bg-gray-100 mb-4">
+              <svg className="w-8 h-8 text-gray-400 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span className="text-sm text-gray-500">{imgFile ? imgFile.name : "Click to choose image"}</span>
+              <input type="file" accept="image/*" className="hidden" onChange={handleImgFileChange} />
+            </label>
+
+            <div className="flex gap-3">
+              <button
+                onClick={handleImgUpload}
+                disabled={!imgFile || imgUploading}
+                className="flex-1 bg-black text-white py-2.5 rounded-lg font-medium disabled:opacity-40 hover:bg-gray-800 transition-colors"
+              >
+                {imgUploading ? "Uploading…" : "Save Image"}
+              </button>
+              <button
+                onClick={() => setImgModal(null)}
+                className="flex-1 bg-gray-100 text-gray-700 py-2.5 rounded-lg font-medium hover:bg-gray-200 transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Add / Edit Product Form ── */}
+      <div ref={formRef}>
+        <h2 className="text-xl font-bold mb-4">{isEditing ? "Edit Product" : "Add New Product"}</h2>
+        <form onSubmit={handleSubmit} className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input required type="text" placeholder="Product Name" value={form.name} onChange={e => setForm({...form, name: e.target.value})} className="border p-2 rounded" />
+          <select required value={form.category_id} onChange={e => setForm({...form, category_id: e.target.value})} className="border p-2 rounded bg-white">
+            <option value="" disabled>Select Category</option>
+            {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+          </select>
+          <input type="text" placeholder="Subcategory (optional)" value={form.subcategory} onChange={e => setForm({...form, subcategory: e.target.value})} className="border p-2 rounded" />
+          <input type="number" placeholder="Order Index" value={form.order_index} onChange={e => setForm({...form, order_index: e.target.value})} className="border p-2 rounded" />
+          <div className="border p-2 rounded md:col-span-2 flex items-center gap-4">
+            <span className="text-sm text-gray-500">Image:</span>
+            <input type="file" accept="image/*" onChange={e => setFile(e.target.files?.[0] || null)} />
+            {isEditing && !file && <span className="text-xs text-blue-500">Leave blank to keep existing image</span>}
+          </div>
+          <div className="md:col-span-2 flex gap-2">
+            <button type="submit" disabled={uploading} className="bg-black text-white px-4 py-2 rounded disabled:opacity-50">
+              {uploading ? "Saving..." : isEditing ? "Update Product" : "Add Product"}
+            </button>
+            {isEditing && <button type="button" onClick={() => { setIsEditing(false); setForm({ name: "", category_id: "", subcategory: "", order_index: "", id: "" }); }} className="bg-gray-200 px-4 py-2 rounded">Cancel</button>}
+          </div>
+        </form>
+      </div>
+
+      {/* ── Product List ── */}
       <h2 className="text-xl font-bold mb-4">Existing Products</h2>
       <div className="flex flex-col gap-8">
         {grouped.map((cat: any) => (
@@ -240,21 +297,27 @@ function ProductsTab({ products, categories, refresh }: { products: any[]; categ
             {cat.products.length === 0 ? <p className="p-2 text-sm text-gray-500">No products</p> : (
               <div className="divide-y pl-4">
                 {cat.products.map((prod: any) => (
-                  <div key={prod.id} className="py-2 flex justify-between items-center">
-                    <div className="flex items-center gap-4">
-                        {prod.image_url ? (
-                          <div className="relative w-10 h-10">
-                            <Image src={prod.image_url} alt="" width={40} height={40} loading="lazy" className="object-contain bg-gray-50 border rounded" />
-                          </div>
+                  <div key={prod.id} className="py-3 flex justify-between items-center gap-4">
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                      {prod.image_url ? (
+                        <div className="relative w-12 h-12 flex-shrink-0">
+                          <Image src={prod.image_url} alt="" width={48} height={48} loading="lazy" className="object-contain bg-gray-50 border rounded w-12 h-12" />
+                        </div>
                       ) : (
-                        <div className="w-10 h-10 bg-gray-200 flex items-center justify-center rounded text-xs text-gray-500">N/A</div>
+                        <div className="w-12 h-12 bg-gray-200 flex items-center justify-center rounded text-xs text-gray-500 flex-shrink-0">N/A</div>
                       )}
-                      <div>
-                        <p className="font-medium text-sm">{prod.name}</p>
+                      <div className="min-w-0">
+                        <p className="font-medium text-sm truncate">{prod.name}</p>
                         <p className="text-xs text-gray-500">{prod.subcategory || "No subcategory"} (Order: {prod.order_index})</p>
                       </div>
                     </div>
-                    <div className="flex gap-2 text-sm">
+                    <div className="flex gap-3 text-sm flex-shrink-0">
+                      <button
+                        onClick={() => openImgModal(prod)}
+                        className="bg-blue-600 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-blue-700 transition-colors whitespace-nowrap"
+                      >
+                        📷 Upload Image
+                      </button>
                       <button onClick={() => handleEdit(prod)} className="text-blue-600 hover:underline">Edit</button>
                       <button onClick={() => handleDelete(prod.id)} className="text-red-600 hover:underline">Delete</button>
                     </div>
