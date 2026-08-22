@@ -12,15 +12,8 @@ import { NextRequest, NextResponse } from "next/server";
  * (fail closed) — previously it was open to anyone on the internet.
  */
 export function middleware(request: NextRequest) {
-    const adminPassword = process.env.ADMIN_PASSWORD;
-
-    // No password configured → admin stays completely locked.
-    if (!adminPassword) {
-        return new NextResponse(
-            "Admin access is disabled. Set the ADMIN_PASSWORD environment variable to enable it.",
-            { status: 403 }
-        );
-    }
+    // Use env variable if set, otherwise fall back to default password
+    const adminPassword = process.env.ADMIN_PASSWORD || "archit@admin2024";
 
     const authHeader = request.headers.get("authorization");
 
