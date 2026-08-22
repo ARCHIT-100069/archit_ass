@@ -151,6 +151,43 @@ function ProductsTab({ products, categories, refresh }: { products: any[]; categ
   const [isEditing, setIsEditing] = useState(false);
   const [uploading, setUploading] = useState(false);
 
+  // Image upload modal state
+  const [imgModal, setImgModal] = useState<{ id: string; name: string; current: string | null } | null>(null);
+  const [imgFile, setImgFile] = useState<File | null>(null);
+  const [imgUploading, setImgUploading] = useState(false);
+  const [imgPreview, setImgPreview] = useState<string | null>(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const openImgModal = (prod: any) => {
+    setImgModal({ id: prod.id, name: prod.name, current: prod.image_url });
+    setImgFile(null);
+    setImgPreview(null);
+  };
+
+  const handleImgFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0] || null;
+    setImgFile(f);
+    if (f) setImgPreview(URL.createObjectURL(f));
+  };
+
+  const handleImgUpload = async () => {
+    if (!imgFile || !imgModal) return;
+    setImgUploading(true);
+    const fileExt = imgFile.name.split('.').pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+    const { data, error } = await supabase.storage.from("product-images").upload(fileName, imgFile);
+    if (error || !data) {
+      alert("Upload failed: " + error?.message);
+      setImgUploading(false);
+      return;
+    }
+    const { data: urlData } = supabase.storage.from("product-images").getPublicUrl(fileName);
+    await supabase.from("products").update({ image_url: urlData.publicUrl }).eq("id", imgModal.id);
+    setImgUploading(false);
+    setImgModal(null);
+    refresh();
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setUploading(true);
