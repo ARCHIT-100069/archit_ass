@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     },
 };
 
-// Re-generate this page at most once per hour (ISR) so product data stays
-// fresh without a client-side fetch — this keeps product names visible to
-// search engines in the server-rendered HTML.
-export const revalidate = 3600;
+// Re-generate this page at most once per 60 seconds (ISR) so product data
+// stays fresh without a client-side fetch — this keeps product names visible
+// to search engines in the server-rendered HTML.
+export const revalidate = 60;
 
 async function getCategories(): Promise<Category[]> {
     try {
